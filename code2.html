@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>K-DEFENSE AEROSPACE &amp; LAND - 무기 체계</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: JetBrains Mono, Space Grotesk, Hanken Grotesk -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..800;1,300..800&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-primary": "#4f5f7a",
+            "secondary": "#b4c5ff",
+            "on-primary": "#21314a",
+            "on-tertiary-container": "#bd7800",
+            "outline-variant": "#44474d",
+            "surface-container-lowest": "#020e21",
+            "on-tertiary": "#472a00",
+            "primary": "#b7c7e7",
+            "primary-fixed-dim": "#b7c7e7",
+            "primary-fixed": "#d5e3ff",
+            "surface-bright": "#2d3a4e",
+            "inverse-surface": "#d6e3fe",
+            "error-container": "#93000a",
+            "tertiary-fixed-dim": "#ffb95f",
+            "on-error-container": "#ffdad6",
+            "on-secondary-fixed-variant": "#003ea8",
+            "on-error": "#690005",
+            "on-surface-variant": "#c5c6ce",
+            "on-background": "#d6e3fe",
+            "surface-dim": "#061426",
+            "on-primary-fixed-variant": "#384761",
+            "primary-container": "#0f2038",
+            "surface-container-high": "#1d2a3e",
+            "on-secondary-container": "#cdd7ff",
+            "surface-tint": "#b7c7e7",
+            "on-primary-container": "#7888a5",
+            "tertiary-fixed": "#ffddb8",
+            "on-secondary-fixed": "#00174b",
+            "on-tertiary-fixed-variant": "#653e00",
+            "surface-variant": "#28354a",
+            "background": "#061426",
+            "on-secondary": "#002a78",
+            "inverse-on-surface": "#243145",
+            "surface-container": "#132033",
+            "on-primary-fixed": "#0a1c34",
+            "error": "#ffb4ab",
+            "on-surface": "#d6e3fe",
+            "outline": "#8e9098",
+            "on-tertiary-fixed": "#2a1700",
+            "secondary-container": "#0053db",
+            "surface": "#061426",
+            "secondary-fixed": "#dbe1ff",
+            "surface-container-highest": "#28354a",
+            "secondary-fixed-dim": "#b4c5ff",
+            "surface-container-low": "#0e1c2f",
+            "tertiary": "#ffb95f",
+            "tertiary-container": "#301b00"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-tablet": "2rem",
+            "space-md": "1rem",
+            "margin": "3rem",
+            "gutter-sm": "1rem",
+            "gutter-lg": "2rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "margin-mobile": "1.25rem",
+            "gutter": "1.5rem",
+            "space-xl": "2.5rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "title-lg": ["Hanken Grotesk"],
+            "label-mono-sm": ["JetBrains Mono"],
+            "display-xl": ["Space Grotesk"],
+            "title-md": ["Hanken Grotesk"],
+            "label-mono-lg": ["JetBrains Mono"],
+            "caption": ["Hanken Grotesk"],
+            "body-lg": ["Hanken Grotesk"],
+            "display-xl-mobile": ["Space Grotesk"],
+            "headline-md": ["Space Grotesk"],
+            "headline-lg-mobile": ["Space Grotesk"],
+            "headline-sm": ["Space Grotesk"],
+            "body-md": ["Hanken Grotesk"],
+            "headline-lg": ["Space Grotesk"]
+          },
+          "fontSize": {
+            "title-lg": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+            "label-mono-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "500"}],
+            "display-xl": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "title-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+            "label-mono-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.04em", "fontWeight": "500"}],
+            "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+            "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+            "display-xl-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "headline-md": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+            "headline-sm": ["22px", {"lineHeight": "30px", "fontWeight": "600"}],
+            "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+            "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "600"}]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: 88px; }
+.page-links { display:flex; flex-wrap:wrap; gap:8px 18px; padding:12px 20px; background:#101c2d; border-bottom:1px solid #354258; color:#cbd5e1; font:12px/1.6 sans-serif; }
+.page-links a { padding:4px 6px; text-decoration:none; }
+.page-links a:hover,.page-links a[aria-current="page"] { color:#8db7ff; text-decoration:underline; }
+.page-links a:focus-visible { outline:2px solid #8db7ff; outline-offset:3px; }
+@media(min-width:1280px){.page-links{display:none;}}
+</style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen selection:bg-secondary-container selection:text-white">
+<!-- TopNavBar (Shared Component) -->
+<header class="docked full-width top-0 sticky z-50 h-16 bg-surface/85 backdrop-blur-md border-b border-outline-variant/45 shadow-none">
+<div class="flex justify-between items-center w-full px-margin max-w-[1360px] mx-auto h-16">
+<!-- Brand Logo / System Identity -->
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary" data-icon="shield">shield</span>
+<span class="font-headline-sm text-headline-sm tracking-wider uppercase font-bold text-on-surface">K-DEFENSE AEROSPACE &amp; LAND</span>
+<span class="px-space-xs py-0.5 ml-2 border border-tertiary/40 bg-tertiary-container/30 text-tertiary font-label-mono-sm text-label-mono-sm">RESTRICTED // K-DEF-SYS</span>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-space-lg h-full">
+<a class="text-on-surface-variant font-label-mono-sm text-label-mono-sm uppercase tracking-wider py-5 hover:text-secondary transition-colors duration-150" href="index.html">01 // 기업 소개</a>
+<!-- Active Nav: "02 // 무기 체계" -->
+<a class="border-b-2 border-secondary-container text-secondary font-label-mono-sm text-label-mono-sm uppercase tracking-wider py-5" href="code2.html">02 // 무기 체계</a>
+<a class="text-on-surface-variant font-label-mono-sm text-label-mono-sm uppercase tracking-wider py-5 hover:text-secondary transition-colors duration-150" href="index.html#rnd">03 // 글로벌 R&amp;D</a>
+<a class="text-on-surface-variant font-label-mono-sm text-label-mono-sm uppercase tracking-wider py-5 hover:text-secondary transition-colors duration-150" href="code3.html">04 // 방문 및 보안</a>
+<a class="text-on-surface-variant font-label-mono-sm text-label-mono-sm uppercase tracking-wider py-5 hover:text-secondary transition-colors duration-150" href="code4.html">05 // 통제 포털</a>
+</nav>
+<!-- Trailing Actions & Icons -->
+<div class="flex items-center gap-space-md">
+<div class="hidden lg:flex items-center gap-space-xs text-outline">
+<button class="p-1 hover:text-secondary transition-colors" title="Language Select">
+<span class="material-symbols-outlined" data-icon="language">language</span>
+</button>
+<button class="p-1 hover:text-secondary transition-colors" title="Security Node Access">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+</button>
+</div>
+<a href="code4.html" class="px-space-md py-1.5 bg-primary-container border border-outline-variant text-on-surface font-label-mono-sm text-label-mono-sm hover:border-secondary transition-colors duration-150">
+          보안 통제실
+        </a>
+<a href="code3.html#visit-form" class="px-space-md py-1.5 bg-secondary-container text-white font-label-mono-sm text-label-mono-sm hover:bg-secondary-container/90 transition-colors duration-150">
+          방문 사전 신청
+        </a>
+</div>
+</div>
+</header>
+<nav class="page-links" aria-label="전체 페이지 이동"><a href="index.html">기업 소개</a><a href="code2.html" aria-current="page">무기 체계</a><a href="index.html#rnd">글로벌 R&amp;D</a><a href="code3.html">방문 및 보안</a><a href="code4.html">통제 포털</a></nav>
+<!-- Secondary Classification Header & Domain Filter -->
+<section class="border-b border-outline-variant/45 bg-surface-container-lowest">
+<div class="max-w-[1360px] mx-auto px-margin py-space-md flex flex-col md:flex-row justify-between items-start md:items-center gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs mb-1">
+<span class="w-2 h-2 bg-secondary rounded-full animate-pulse"></span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary uppercase">DEFENSE ASSETS CATALOG // CLASSIFICATION 2-A</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">차세대 지상 기동 &amp; 화력 타격 무기체계</h1>
+</div>
+<!-- Category Filter Tabs -->
+<div class="flex items-center bg-surface-container p-1 border border-outline-variant/45">
+<button class="px-space-md py-1.5 font-label-mono-sm text-label-mono-sm text-on-surface-variant hover:text-on-surface transition-colors">
+          전체 체계
+        </button>
+<button class="px-space-md py-1.5 font-label-mono-sm text-label-mono-sm bg-primary-container text-secondary border-b-2 border-secondary font-semibold">
+          지상기동 (주력전차)
+        </button>
+<button class="px-space-md py-1.5 font-label-mono-sm text-label-mono-sm text-on-surface-variant hover:text-on-surface transition-colors">
+          정밀포병 (자주포)
+        </button>
+<button class="px-space-md py-1.5 font-label-mono-sm text-label-mono-sm text-on-surface-variant hover:text-on-surface transition-colors">
+          유무인 복합체계 (MUM-T)
+        </button>
+</div>
+</div>
+</section>
+<!-- MAIN CANVAS -->
+<main class="max-w-[1360px] mx-auto px-margin py-space-xl space-y-24">
+<!-- ========================================================================= -->
+<!-- SECTION 1: K-990 Vanguard Black Panther Main Battle Tank                 -->
+<!-- ========================================================================= -->
+<section class="space-y-space-lg" id="section-mbt">
+<!-- Section Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between border-b border-outline-variant/45 pb-space-sm gap-space-sm">
+<div>
+<div class="flex items-center gap-space-xs text-primary font-label-mono-sm text-label-mono-sm uppercase mb-1">
+<span>SYS.ID: K-990 VANGUARD</span>
+<span class="text-outline">|</span>
+<span>NEXT-GEN MBT ARCHITECTURE</span>
+<span class="text-outline">|</span>
+<span class="text-tertiary">CONFIDENTIAL CLEARANCE</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">K-990 뱅가드 차세대 주력전차</h2>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="px-space-sm py-1 border border-outline-variant bg-surface-container font-label-mono-sm text-label-mono-sm text-on-surface-variant">
+            ACTIVE HARD-KILL APS ARMORED
+          </span>
+<span class="px-space-sm py-1 border border-secondary/40 bg-secondary-container/20 text-secondary font-label-mono-sm text-label-mono-sm">
+            AI AUTONOMOUS TARGET TRACKING
+          </span>
+</div>
+</div>
+<!-- Interactive 360 Spec Hotspot Interactive Canvas -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Viewer Visual Container (8 cols) -->
+<div class="lg:col-span-8 bg-surface-container border border-outline-variant/45 relative overflow-hidden group">
+<!-- Tactical HUD Grids -->
+<div class="absolute inset-0 pointer-events-none z-10 flex flex-col justify-between p-space-md">
+<div class="flex justify-between items-start text-outline font-label-mono-sm text-label-mono-sm">
+<div class="bg-surface-container-lowest/80 px-2 py-1 border border-outline-variant/30 backdrop-blur-sm">
+                CAM: FRONT-OBLIQUE 45° // LAT: 37.5665 N // RADAR: ACTIVE
+              </div>
+<div class="flex items-center gap-2 bg-surface-container-lowest/80 px-2 py-1 border border-outline-variant/30 backdrop-blur-sm text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-ping"></span>
+                TELEMETRY FEED OK
+              </div>
+</div>
+<!-- Bottom HUD Crosshairs -->
+<div class="flex justify-between items-end font-label-mono-sm text-label-mono-sm text-outline">
+<span class="bg-surface-container-lowest/80 px-2 py-0.5 border border-outline-variant/30">ROTATION: 360° LOCKED</span>
+<span class="bg-surface-container-lowest/80 px-2 py-0.5 border border-outline-variant/30">ZOOM: 1.0X TACTICAL</span>
+</div>
+</div>
+<!-- Main Tactical Tank Asset -->
+<div class="relative w-full h-[460px] bg-surface-container-low flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover object-center filter contrast-125 brightness-95" data-alt="A futuristic heavy main battle tank K-990 Vanguard Black Panther parked in a sleek dark military engineering facility. Atmospheric dramatic lighting with cold blue and titanium gray reflections casting hard shadows across angular composite armor plates and a massive 130mm smoothbore gun barrel. High-tech HUD diagnostics and fine wireframe grid lines projected softly across the deep void navy titanium floor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZp3t5DQ2kUYI62uEbEfNcerIwVrZJerNA8uX9vwpiIx1B5uYvS1KsmQsIOqSDLePtQozeL2RKHSVhGwupknfxY0YYHDDDzmj-mvXp72sfDKdWHBtlrGzyV30H3uB-UhtUPawZdzZw1GX97nKh2qVqcSmf7IZPe__XPlfckfWaaLxDmDTNkV220iMC5zqbWwHy0yP-KjSXt7om8-8YJctLqR8gV0BhnhjlonyNzPU"/>
+<!-- Hotspot 1: 130mm 활강포 -->
+<div class="absolute top-[28%] left-[28%] z-20 group/spot cursor-pointer">
+<div class="relative flex items-center justify-center">
+<span class="w-4 h-4 rounded-full bg-secondary-container animate-ping absolute"></span>
+<span class="w-3 h-3 rounded-full bg-secondary border border-white flex items-center justify-center shadow-lg"></span>
+</div>
+<div class="absolute left-6 -top-3 w-52 bg-surface-container-lowest/90 border border-secondary p-2 backdrop-blur-md shadow-2xl transition-all duration-200">
+<div class="font-label-mono-sm text-label-mono-sm text-secondary font-bold">HOTSPOT 01 // 화력 체계</div>
+<div class="font-title-md text-title-md text-on-surface">130mm 활강포</div>
+<div class="font-caption text-caption text-on-surface-variant">고압 신형 약실 &amp; 자동장전장치, 관통력 1,200mm 보장</div>
+</div>
+</div>
+<!-- Hotspot 2: 능동방호시스템 APS -->
+<div class="absolute top-[38%] left-[54%] z-20 group/spot cursor-pointer">
+<div class="relative flex items-center justify-center">
+<span class="w-4 h-4 rounded-full bg-tertiary animate-ping absolute"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed border border-white flex items-center justify-center shadow-lg"></span>
+</div>
+<div class="absolute right-6 -top-3 w-56 bg-surface-container-lowest/90 border border-tertiary p-2 backdrop-blur-md shadow-2xl transition-all duration-200">
+<div class="font-label-mono-sm text-label-mono-sm text-tertiary font-bold">HOTSPOT 02 // 생존성 체계</div>
+<div class="font-title-md text-title-md text-on-surface">능동방호시스템 (APS)</div>
+<div class="font-caption text-caption text-on-surface-variant">다기능 레이더 하드킬 요격탄 연동, 360° 대전차미사일 방호</div>
+</div>
+</div>
+<!-- Hotspot 3: 하이브리드 파워팩 -->
+<div class="absolute bottom-[30%] right-[22%] z-20 group/spot cursor-pointer">
+<div class="relative flex items-center justify-center">
+<span class="w-4 h-4 rounded-full bg-secondary-container animate-ping absolute"></span>
+<span class="w-3 h-3 rounded-full bg-secondary border border-white"></span>
+</div>
+<div class="absolute right-6 bottom-0 w-52 bg-surface-container-lowest/90 border border-secondary p-2 backdrop-blur-md shadow-2xl">
+<div class="font-label-mono-sm text-label-mono-sm text-secondary font-bold">HOTSPOT 03 // 기동 체계</div>
+<div class="font-title-md text-title-md text-on-surface">하이브리드 파워팩</div>
+<div class="font-caption text-caption text-on-surface-variant">1,800HP 디젤-전기 복합 구동, 침묵 감시 및 저소음 기동</div>
+</div>
+</div>
+<!-- Hotspot 4: AI 표적탐지 -->
+<div class="absolute top-[20%] left-[45%] z-20 group/spot cursor-pointer">
+<div class="relative flex items-center justify-center">
+<span class="w-4 h-4 rounded-full bg-secondary-container animate-ping absolute"></span>
+<span class="w-3 h-3 rounded-full bg-secondary border border-white"></span>
+</div>
+<div class="absolute left-6 -top-2 w-52 bg-surface-container-lowest/90 border border-secondary p-2 backdrop-blur-md shadow-2xl">
+<div class="font-label-mono-sm text-label-mono-sm text-secondary font-bold">HOTSPOT 04 // 지휘 통제</div>
+<div class="font-title-md text-title-md text-on-surface">AI 지능형 표적탐지</div>
+<div class="font-caption text-caption text-on-surface-variant">다목적 EO/IR 센서 퓨전 및 표적 우선순위 자동 연산</div>
+</div>
+</div>
+</div>
+<!-- Bottom Control Bar for 360 Rotating simulation -->
+<div class="bg-surface-container-high px-space-md py-space-sm border-t border-outline-variant/45 flex items-center justify-between">
+<div class="flex items-center gap-space-md text-outline font-label-mono-sm text-label-mono-sm">
+<span class="text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="sync">sync</span> 360° 회전 뷰어
+              </span>
+<span>AZIMUTH: 184°</span>
+<span>ELEVATION: +12°</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-2 py-1 bg-surface-container text-on-surface font-label-mono-sm text-label-mono-sm border border-outline-variant/60 hover:border-secondary transition-colors">FLIR 야간 모드</button>
+<button class="px-2 py-1 bg-surface-container text-on-surface font-label-mono-sm text-label-mono-sm border border-outline-variant/60 hover:border-secondary transition-colors">장갑 두께 투시</button>
+<button class="px-2 py-1 bg-secondary-container text-white font-label-mono-sm text-label-mono-sm">기본 텍스처</button>
+</div>
+</div>
+</div>
+<!-- Specification Data Card (4 cols) -->
+<div class="lg:col-span-4 bg-surface-container border border-outline-variant/45 p-space-lg flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-center border-b border-outline-variant/45 pb-space-sm mb-space-md">
+<span class="font-label-mono-sm text-label-mono-sm text-outline uppercase">CORE SPECIFICATIONS MATRIX</span>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary">REV 4.2</span>
+</div>
+<!-- Parameters Grid -->
+<div class="space-y-space-md">
+<!-- Spec item -->
+<div class="bg-surface-container-low p-space-sm border-l-2 border-secondary flex justify-between items-center">
+<div>
+<div class="font-label-mono-sm text-label-mono-sm text-outline">전투 중량 (COMBAT WEIGHT)</div>
+<div class="font-title-lg text-title-lg text-on-surface font-mono">55.0 METRIC TONS</div>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary-container bg-surface px-2 py-1 border border-outline-variant/45">HEAVY CLASS</span>
+</div>
+<!-- Spec item -->
+<div class="bg-surface-container-low p-space-sm border-l-2 border-secondary flex justify-between items-center">
+<div>
+<div class="font-label-mono-sm text-label-mono-sm text-outline">최고 속도 (MAX SPEED)</div>
+<div class="font-title-lg text-title-lg text-on-surface font-mono">70 km/h (ROAD) / 50 km/h (CROSS)</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="speed">speed</span>
+</div>
+<!-- Spec item -->
+<div class="bg-surface-container-low p-space-sm border-l-2 border-secondary flex justify-between items-center">
+<div>
+<div class="font-label-mono-sm text-label-mono-sm text-outline">유효 사정거리 (EFFECTIVE RANGE)</div>
+<div class="font-title-lg text-title-lg text-on-surface font-mono">5,000 m (직사 APFSDS)</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="crisis_alert">crisis_alert</span>
+</div>
+<!-- Spec item -->
+<div class="bg-surface-container-low p-space-sm border-l-2 border-secondary flex justify-between items-center">
+<div>
+<div class="font-label-mono-sm text-label-mono-sm text-outline">승무원 운용체계 (CREW CAPACITY)</div>
+<div class="font-title-lg text-title-lg text-on-surface font-mono">3인 (전차장 / 포수 / 조종수)</div>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">무인포탑 대응</span>
+</div>
+<!-- Spec item -->
+<div class="bg-surface-container-low p-space-sm border-l-2 border-tertiary flex justify-between items-center">
+<div>
+<div class="font-label-mono-sm text-label-mono-sm text-tertiary">생화학 방호 (NBC DEFENSE)</div>
+<div class="font-title-lg text-title-lg text-on-surface font-mono">양압식 완전 밀폐 + 중성자 차폐</div>
+</div>
+<span class="material-symbols-outlined text-tertiary" data-icon="shield">shield</span>
+</div>
+</div>
+</div>
+<!-- Bottom Action within card -->
+<div class="pt-space-md border-t border-outline-variant/45 mt-space-md">
+<button class="w-full py-2.5 bg-primary-container text-secondary border border-secondary hover:bg-secondary hover:text-on-secondary transition-colors font-label-mono-lg text-label-mono-lg flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="picture_as_pdf">picture_as_pdf</span>
+              K-990 기밀 제원 세부 브로슈어 요청
+            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 2: K-550 Thunder Precision Self-Propelled Howitzer               -->
+<!-- ========================================================================= -->
+<section class="space-y-space-lg" id="section-sph">
+<!-- Section Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between border-b border-outline-variant/45 pb-space-sm gap-space-sm">
+<div>
+<div class="flex items-center gap-space-xs text-primary font-label-mono-sm text-label-mono-sm uppercase mb-1">
+<span>SYS.ID: K-550 THUNDER PRECISION</span>
+<span class="text-outline">|</span>
+<span>FULLY AUTOMATED ARTILLERY COMPLEX</span>
+<span class="text-outline">|</span>
+<span class="text-secondary">TACTICAL ARTILLERY</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">K-550 썬더 차세대 정밀 자주포</h2>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="px-space-sm py-1 border border-outline-variant bg-surface-container font-label-mono-sm text-label-mono-sm text-on-surface-variant">
+            TOT(동시탄착사격) 최적화 포탑
+          </span>
+<span class="px-space-sm py-1 border border-secondary/40 bg-secondary-container/20 text-secondary font-label-mono-sm text-label-mono-sm">
+            100% 무인 원격제어 가능
+          </span>
+</div>
+</div>
+<!-- Bento Grid Layout for Artillery -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Left: Image & Tech specs Overview (5 cols) -->
+<div class="lg:col-span-5 bg-surface-container border border-outline-variant/45 p-space-lg flex flex-col justify-between">
+<div>
+<div class="relative w-full h-64 bg-surface-container-low border border-outline-variant/45 overflow-hidden mb-space-md">
+<img class="w-full h-full object-cover filter contrast-125 brightness-90" data-alt="A self-propelled heavy artillery howitzer vehicle K-550 Thunder in a high-tech tactical testing range under a deep twilight sky. The long 155mm 52-caliber gun barrel is elevated diagonally upward. Sharp cold white floodlights illuminate the armored steel chassis with blue precision tracking laser beams tracing target trajectories across the dark landscape." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD46vOZALtwgOqEIUWoWzhVDwtpu8RyMEWkBju6zuZi02prXVOFTMk_7lQEMeASHIuP8EiIxlFLf7xLWVE7yFKJ8QaNV8PWKmKx4GIBJV1u6LGvkfLmxTXuTnJUM9u7Nki67G1K4M1HrZr8oGC2npFFCRlaCjtRIADIx9AJXrGWnrVgo2IMrKg49hduvu0__FdmeiqSxUlR_CWX6XZLB1ntyzxeK7SN34Myp1HTg90"/>
+<div class="absolute bottom-2 left-2 bg-surface-container-lowest/90 px-2 py-1 border border-outline-variant/45 font-label-mono-sm text-label-mono-sm text-secondary">
+                CALIBER: 155MM / 52 CALIBER RIFLED
+              </div>
+</div>
+<!-- Precision Spec Table -->
+<div class="space-y-space-sm font-body-md text-body-md">
+<div class="flex justify-between items-center py-2 border-b border-outline-variant/30">
+<span class="text-outline font-label-mono-sm text-label-mono-sm">주무장 구경장</span>
+<span class="text-on-surface font-mono font-bold">155mm 52구경장 자동화 포신</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-outline-variant/30">
+<span class="text-outline font-label-mono-sm text-label-mono-sm">최대 사거리</span>
+<span class="text-secondary font-mono font-bold">54 km+ (활강유도포탄 적용시 70km)</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-outline-variant/30">
+<span class="text-outline font-label-mono-sm text-label-mono-sm">사격 준비 시간</span>
+<span class="text-on-surface font-mono font-bold">정지 후 15초 이내 초탄 발사</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-outline-variant/30">
+<span class="text-outline font-label-mono-sm text-label-mono-sm">급속 사격 속도</span>
+<span class="text-on-surface font-mono font-bold">분당 최대 10발 (3분간 급속 지속)</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-outline-variant/30">
+<span class="text-outline font-label-mono-sm text-label-mono-sm">무인 원격화 단계</span>
+<span class="text-on-surface font-mono font-bold">Level 4 자율주행 및 원격격발 지원</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm border-t border-outline-variant/45">
+<div class="font-label-mono-sm text-label-mono-sm text-outline mb-1">C4I TACTICAL DATA LINK</div>
+<div class="font-body-md text-body-md text-on-surface-variant">포대 지휘통제차량(BTCS) 및 정찰 드론 연계 자동 표적제원 전송</div>
+</div>
+</div>
+<!-- Right: TOT Simulation & Automated Turret Telemetry (7 cols) -->
+<div class="lg:col-span-7 space-y-space-lg flex flex-col justify-between">
+<!-- Card: TOT (Time-On-Target) Dynamic Interactive Simulation Box -->
+<div class="bg-surface-container border border-outline-variant/45 p-space-lg relative">
+<div class="flex justify-between items-center border-b border-outline-variant/45 pb-space-sm mb-space-md">
+<div>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary uppercase font-bold">TACTICAL SIMULATION // TOT CAPABILITY</span>
+<h3 class="font-title-lg text-title-lg text-on-surface">동시탄착사격 (Time-On-Target) 6발 정밀 집중 시뮬레이션</h3>
+</div>
+<span class="px-2 py-1 bg-surface-container-high border border-outline text-outline font-label-mono-sm text-label-mono-sm">
+                TARGET DISTANCE: 42.8 KM
+              </span>
+</div>
+<!-- Trajectory Diagram / Visualization Canvas Area -->
+<div class="h-56 bg-surface-container-lowest border border-outline-variant/30 p-space-md relative flex flex-col justify-between overflow-hidden">
+<!-- Grid background lines -->
+<div class="absolute inset-0 bg-[linear-gradient(to_right,#132033_1px,transparent_1px),linear-gradient(to_bottom,#132033_1px,transparent_1px)] bg-[size:24px_24px] opacity-40 pointer-events-none"></div>
+<!-- Telemetry top info -->
+<div class="relative z-10 flex justify-between font-label-mono-sm text-label-mono-sm text-outline">
+<span>SIMULATION FPS: 60 // ELEVATION ANGLE: 42° - 68° VARIABLE</span>
+<span class="text-tertiary">탄착 오차 반경 (CEP): &lt; 1.5 M</span>
+</div>
+<!-- Graphic Curves (SVG ballistic arcs) -->
+<div class="relative z-10 w-full h-32 flex items-end">
+<svg class="w-full h-full" fill="none" viewbox="0 0 600 120">
+<!-- Arc 1: High Angle (Long flight time) -->
+<path class="opacity-90" d="M 20 110 Q 180 -30 560 110" stroke="#b4c5ff" stroke-dasharray="4 2" stroke-width="2"></path>
+<!-- Arc 2: Mid-High Angle -->
+<path class="opacity-80" d="M 20 110 Q 240 10 560 110" stroke="#0053db" stroke-width="2"></path>
+<!-- Arc 3: Low Angle (Direct flight time) -->
+<path class="opacity-95" d="M 20 110 Q 300 45 560 110" stroke="#ffb95f" stroke-width="2.5"></path>
+<!-- Target Ground zero point -->
+<circle class="animate-ping" cx="560" cy="110" fill="#ffb95f" r="6"></circle>
+<circle cx="560" cy="110" fill="#ffb95f" r="4"></circle>
+<text fill="#ffb95f" font-family="JetBrains Mono" font-size="10" x="510" y="100">IMPACT [T-0.0s]</text>
+<!-- Firing point -->
+<circle cx="20" cy="110" fill="#b4c5ff" r="4"></circle>
+<text fill="#b4c5ff" font-family="JetBrains Mono" font-size="10" x="15" y="100">K-550</text>
+</svg>
+</div>
+<!-- Simulation Metrics Row -->
+<div class="relative z-10 grid grid-cols-3 gap-2 pt-2 border-t border-outline-variant/30 text-center font-label-mono-sm text-label-mono-sm">
+<div>
+<span class="text-outline block">1탄 고각 사격</span>
+<span class="text-on-surface font-mono font-bold">ELEV 68.2° (체공 48초)</span>
+</div>
+<div>
+<span class="text-outline block">3탄 중각 사격</span>
+<span class="text-on-surface font-mono font-bold">ELEV 55.4° (체공 36초)</span>
+</div>
+<div>
+<span class="text-outline block">6탄 저각 사격</span>
+<span class="text-secondary font-mono font-bold">ELEV 43.1° (동시 탄착)</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md flex items-center justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">
+                단일 포로 최대 6발의 탄을 각기 다른 각도로 연속 발사하여 동일 지점에 동시 착탄시켜 화력 효과 극대화.
+              </span>
+<button class="px-space-md py-1.5 bg-surface-container-high border border-secondary text-secondary font-label-mono-sm text-label-mono-sm hover:bg-secondary-container hover:text-white transition-colors">
+                시뮬레이션 재실행
+              </button>
+</div>
+</div>
+<!-- Card: Fully Automated Turret Mechanism Specs -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="bg-surface-container border border-outline-variant/45 p-space-md">
+<div class="flex items-center gap-2 mb-2 text-secondary">
+<span class="material-symbols-outlined" data-icon="precision_manufacturing">precision_manufacturing</span>
+<span class="font-title-md text-title-md">완전 자동화 탄약 공급</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                포탄 및 모듈형 장약(MCS) 전 자동화 이송 로봇 시스템 장착으로 승무원 장전 피로도 0% 달성 및 발사 속도 300% 향상.
+              </p>
+</div>
+<div class="bg-surface-container border border-outline-variant/45 p-space-md">
+<div class="flex items-center gap-2 mb-2 text-tertiary">
+<span class="material-symbols-outlined" data-icon="cell_tower">cell_tower</span>
+<span class="font-title-md text-title-md">무인 원격 사격 통제</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                포반원 탑승 없이 10km 후방 전술통제차량(TOC)에서 다목적 암호화 무선 데이터링크를 통해 자주포 10문 단독 제어 가능.
+              </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 3: SPEC MATRIX (Comparative Analysis Table)                     -->
+<!-- ========================================================================= -->
+<section class="space-y-space-md">
+<div class="flex flex-col md:flex-row justify-between md:items-end border-b border-outline-variant/45 pb-space-sm gap-2">
+<div>
+<span class="font-label-mono-sm text-label-mono-sm text-outline uppercase">TACTICAL BENCHMARK MATRIX</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">기동성 · 화력 · C4I 네트워크 연동성 비교 분석</h2>
+</div>
+<div class="font-label-mono-sm text-label-mono-sm text-outline">
+          CLASSIFICATION: NATO STANAG COMPLIANT
+        </div>
+</div>
+<!-- Tactical Matrix Table -->
+<div class="border border-outline-variant/45 overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high border-b border-outline-variant/45">
+<th class="p-space-md font-label-mono-sm text-label-mono-sm text-outline uppercase w-1/4">평가 파라미터</th>
+<th class="p-space-md font-label-mono-sm text-label-mono-sm text-secondary uppercase w-3/8 border-l border-outline-variant/45">
+                K-990 Vanguard (주력전차)
+              </th>
+<th class="p-space-md font-label-mono-sm text-label-mono-sm text-primary uppercase w-3/8 border-l border-outline-variant/45">
+                K-550 Thunder (정밀자주포)
+              </th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30 font-body-md text-body-md">
+<!-- Category: 주무장 화력 -->
+<tr class="bg-surface-container-low hover:bg-surface-container transition-colors">
+<td class="p-space-md font-title-md text-title-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="sports_martial_arts">sports_martial_arts</span>
+                주무장 제원 및 구경
+              </td>
+<td class="p-space-md border-l border-outline-variant/30 font-mono text-on-surface">
+                130mm 55구경장 활강포 (초속 1,850m/s)
+              </td>
+<td class="p-space-md border-l border-outline-variant/30 font-mono text-on-surface">
+                155mm 52구경장 강선포 (자동화 폐쇄기 장착)
+              </td>
+</tr>
+<!-- Category: 최대 교전 거리 -->
+<tr class="bg-surface-container hover:bg-surface-container-high transition-colors">
+<td class="p-space-md font-title-md text-title-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="radar">radar</span>
+                최대 유효 사정거리
+              </td>
+<td class="p-space-md border-l border-outline-variant/30 font-mono text-on-surface">
+                5,000m (직사포탄) / 8,000m (유도포탄)
+              </td>
+<td class="p-space-md border-l border-outline-variant/30 font-mono text-secondary font-bold">
+                54km (RAP 로켓추진탄) / 70km (활강유도탄)
+              </td>
+</tr>
+<!-- Category: 발사 속도 및 준비 시간 -->
+<tr class="bg-surface-container-low hover:bg-surface-container transition-colors">
+<td class="p-space-md font-title-md text-title-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="timer">timer</span>
+                발사 주기 및 반응 속도
+              </td>
+<td class="p-space-md border-l border-outline-variant/30 font-mono text-on-surface">
+                분당 12발 (자동장전 / 헌터킬러 작동 2초)
+              </td>
+<td class="p-space-md border-l border-outline-variant/30 font-mono text-on-surface">
+                분당 10발 (급속) / 정지 후 15초 내 초탄 사격
+              </td>
+</tr>
+<!-- Category: 기동력 및 항속거리 -->
+<tr class="bg-surface-container hover:bg-surface-container-high transition-colors">
+<td class="p-space-md font-title-md text-title-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="local_shipping">local_shipping</span>
+                기동 동력 및 항속거리
+              </td>
+<td class="p-space-md border-l border-outline-variant/30 font-mono text-on-surface">
+                1,800마력 하이브리드 / 최고 70km/h / 항속 480km
+              </td>
+<td class="p-space-md border-l border-outline-variant/30 font-mono text-on-surface">
+                1,200마력 가스터빈보조 디젤 / 최고 67km/h / 항속 360km
+              </td>
+</tr>
+<!-- Category: 네트워크 전장 C4I -->
+<tr class="bg-surface-container-low hover:bg-surface-container transition-colors">
+<td class="p-space-md font-title-md text-title-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="hub">hub</span>
+                C4I &amp; 전장 네트워크 연동
+              </td>
+<td class="p-space-md border-l border-outline-variant/30 font-mono text-secondary">
+                지상전투 전술 C4I 통합, 정찰 소형 UAV 2기 직접 통제
+              </td>
+<td class="p-space-md border-l border-outline-variant/30 font-mono text-secondary">
+                BTCS 자동포병망, 대포병탐지레이더 직결 자동 조준
+              </td>
+</tr>
+<!-- Category: 방호력 및 생존성 -->
+<tr class="bg-surface-container hover:bg-surface-container-high transition-colors">
+<td class="p-space-md font-title-md text-title-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="security">security</span>
+                방호 구조 및 APS 시스템
+              </td>
+<td class="p-space-md border-l border-outline-variant/30 font-mono text-on-surface">
+                신소재 복합장갑 + 하드킬 능동방호(APS) + 차체 하부 EFP 방호
+              </td>
+<td class="p-space-md border-l border-outline-variant/30 font-mono text-on-surface">
+                고장력 방탄강판 (155mm 파편 및 14.5mm 철갑탄 전면 방호)
+              </td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 4: ACTIONS (Brochure Download & Technical Briefing CTA)           -->
+<!-- ========================================================================= -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-space-lg bg-surface-container-low border border-outline-variant/45 p-space-xl relative overflow-hidden">
+<!-- Decorative Tactical Background Watermark -->
+<div class="absolute -right-10 -bottom-10 opacity-5 pointer-events-none select-none text-white">
+<span class="material-symbols-outlined text-[300px]" data-icon="shield">shield</span>
+</div>
+<!-- Left Action: Secure PDF Brochure -->
+<div class="md:col-span-6 space-y-space-md pr-0 md:pr-space-md border-b md:border-b-0 md:border-r border-outline-variant/45 pb-space-lg md:pb-0">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span class="font-label-mono-sm text-label-mono-sm uppercase">SECURE DOCUMENT DISTRIBUTION</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">2025 지상무기체계 종합 기술 브로슈어</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          K-990 전차 및 K-550 자주포의 전술 운용 교리, 화력 시험 성적서, MRO 유지보수 주기, 체계 연동 사양서를 포함한 84페이지 공식 보안 검증 기술 자료집입니다.
+        </p>
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md pt-2">
+<button class="px-space-lg py-3 bg-secondary-container text-white font-label-mono-lg text-label-mono-lg flex items-center gap-2 hover:bg-secondary-container/90 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+            보안 검증 PDF 다운로드 (v2.8)
+          </button>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">
+            SHA-256 서명 완료 (파일 크기: 42.4 MB)
+          </span>
+</div>
+</div>
+<!-- Right Action: Military Official Tech Meeting Schedule -->
+<div class="md:col-span-6 space-y-space-md pl-0 md:pl-space-md">
+<div class="flex items-center gap-2 text-tertiary">
+<span class="material-symbols-outlined" data-icon="badge">badge</span>
+<span class="font-label-mono-sm text-label-mono-sm uppercase">OFFICIAL PROCUREMENT DELEGATION</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">국방 관계자 비공개 기술 미팅 신청</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          국내외 방위사업청, 군수사령부, 해외 국방 획득 관계관을 위한 기술 시연 및 양산 일정 협의 전담 세션을 신청하십시오. 인가된 인원에 한해 사전 보안 인가를 발급합니다.
+        </p>
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md pt-2">
+<button class="px-space-lg py-3 bg-primary-container border border-secondary text-secondary font-label-mono-lg text-label-mono-lg flex items-center gap-2 hover:bg-secondary hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="contact_mail">contact_mail</span>
+            기술 브리핑 및 실사 신청
+          </button>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">
+            신청 처리 기간: 24시간 이내 신원 확인
+          </span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full py-space-xl border-t bg-surface-container-lowest border-outline-variant/45 mt-20">
+<div class="max-w-[1360px] mx-auto px-margin flex flex-col md:flex-row justify-between items-center gap-space-lg">
+<!-- Brand & Copyright -->
+<div class="flex flex-col gap-space-xs text-center md:text-left">
+<div class="flex items-center justify-center md:justify-start gap-space-xs">
+<span class="material-symbols-outlined text-secondary" data-icon="shield">shield</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">K-DEFENSE AEROSPACE &amp; LAND</span>
+</div>
+<p class="font-caption text-caption text-outline">
+          COPYRIGHT © 2025 K-DEFENSE AEROSPACE &amp; LAND SYSTEMS CO., LTD. ALL RIGHTS RESERVED. DEFENSE CLASSIFIED INFORMATION RESTRICTED.
+        </p>
+</div>
+<!-- Regulatory Policy Links from JSON -->
+<div class="flex flex-wrap justify-center md:justify-end gap-x-space-lg gap-y-space-xs">
+<a class="text-outline font-label-mono-sm text-label-mono-sm hover:text-on-surface transition-colors duration-150" href="#policy-1">
+          국가핵심기술 보호방침
+        </a>
+<a class="text-outline font-label-mono-sm text-label-mono-sm hover:text-on-surface transition-colors duration-150" href="#policy-2">
+          영상정보처리기기 운영방침
+        </a>
+<a class="text-outline font-label-mono-sm text-label-mono-sm hover:text-on-surface transition-colors duration-150" href="#policy-3">
+          방산보안 통제지침
+        </a>
+<a class="text-outline font-label-mono-sm text-label-mono-sm hover:text-on-surface transition-colors duration-150" href="#policy-4">
+          사이버보안 침해대응센터
+        </a>
+<a class="text-outline font-label-mono-sm text-label-mono-sm hover:text-on-surface transition-colors duration-150" href="#policy-5">
+          방위사업청 연계포털
+        </a>
+</div>
+</div>
+</footer>
+</body></html>
