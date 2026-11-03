@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PERFORMANCE — Radar Mission Analysis &amp; Alternative Comparison | RADAR INSIGHT</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Noto+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container": "#14212d",
+            "secondary-fixed": "#c7ebd4",
+            "text-secondary-light": "#526876",
+            "radar-canvas": "#0C1822",
+            "border-dark": "#304451",
+            "surface-bright": "#2e3a47",
+            "primary-fixed": "#b0f67c",
+            "on-tertiary-fixed-variant": "#384957",
+            "on-tertiary-fixed": "#0b1d2a",
+            "on-background": "#d6e4f5",
+            "outline": "#8b9381",
+            "on-primary-container": "#326900",
+            "on-tertiary-container": "#4d5e6d",
+            "on-secondary-container": "#9ec0ab",
+            "secondary-fixed-dim": "#abcfb9",
+            "error": "#ffb4ab",
+            "badge-text-green": "#325B3A",
+            "surface-light": "#F4F7F8",
+            "text-secondary-dark": "#AFBEC8",
+            "primary-fixed-dim": "#95d963",
+            "outline-variant": "#41493a",
+            "error-container": "#93000a",
+            "surface-container-low": "#101d29",
+            "text-on-light": "#142B40",
+            "on-surface-variant": "#c1c9b5",
+            "inverse-primary": "#336b00",
+            "secondary": "#abcfb9",
+            "tertiary-fixed-dim": "#b7c9da",
+            "on-primary-fixed": "#0b2000",
+            "primary-container": "#a3e870",
+            "on-secondary-fixed": "#002113",
+            "primary": "#d3ffaf",
+            "tertiary-container": "#c5d7e9",
+            "on-primary-fixed-variant": "#255100",
+            "surface-tint": "#95d963",
+            "surface-variant": "#293643",
+            "on-tertiary": "#213240",
+            "on-error-container": "#ffdad6",
+            "on-secondary": "#173627",
+            "surface-container-highest": "#293643",
+            "surface": "#071420",
+            "secondary-container": "#30503f",
+            "on-secondary-fixed-variant": "#2e4d3d",
+            "inverse-surface": "#d6e4f5",
+            "surface-dim": "#071420",
+            "surface-container-lowest": "#030f1b",
+            "inverse-on-surface": "#25323e",
+            "background": "#071420",
+            "surface-container-high": "#1e2b38",
+            "on-error": "#690005",
+            "tertiary": "#e8f3ff",
+            "badge-green-soft": "#E0EED8",
+            "border-light": "#CFDADF",
+            "tertiary-fixed": "#d3e5f6",
+            "on-surface": "#d6e4f5",
+            "on-primary": "#173800"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "gutter-desktop": "1.5rem",
+            "space-xl": "2rem",
+            "space-3xl": "4rem",
+            "gutter": "1rem",
+            "space-2xl": "3rem",
+            "space-xs": "0.25rem",
+            "margin-desktop": "2rem",
+            "space-sm": "0.5rem",
+            "margin": "1.25rem",
+            "space-md": "1rem"
+          },
+          "fontFamily": {
+            "display-hero": ["Noto Sans"],
+            "headline-sm": ["Noto Sans"],
+            "headline-lg": ["Noto Sans"],
+            "caption": ["Noto Sans"],
+            "label-field": ["Noto Sans"],
+            "telemetry-reticle": ["IBM Plex Mono"],
+            "telemetry-data": ["IBM Plex Mono"],
+            "display-hero-mobile": ["Noto Sans"],
+            "telemetry-metric-mobile": ["IBM Plex Mono"],
+            "headline-md": ["Noto Sans"],
+            "body-md": ["Noto Sans"],
+            "body-lg": ["Noto Sans"],
+            "telemetry-metric": ["IBM Plex Mono"]
+          },
+          "fontSize": {
+            "display-hero": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+            "headline-sm": ["16px", { lineHeight: "24px", letterSpacing: "0.01em", fontWeight: "600" }],
+            "headline-lg": ["28px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "700" }],
+            "caption": ["12px", { lineHeight: "16px", letterSpacing: "0.01em", fontWeight: "400" }],
+            "label-field": ["13px", { lineHeight: "18px", letterSpacing: "0.02em", fontWeight: "600" }],
+            "telemetry-reticle": ["11px", { lineHeight: "14px", letterSpacing: "0.05em", fontWeight: "400" }],
+            "telemetry-data": ["14px", { lineHeight: "20px", letterSpacing: "0.02em", fontWeight: "400" }],
+            "display-hero-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }],
+            "telemetry-metric-mobile": ["32px", { lineHeight: "36px", letterSpacing: "-0.02em", fontWeight: "500" }],
+            "headline-md": ["20px", { lineHeight: "28px", letterSpacing: "0em", fontWeight: "700" }],
+            "body-md": ["14px", { lineHeight: "22px", letterSpacing: "0em", fontWeight: "400" }],
+            "body-lg": ["16px", { lineHeight: "26px", letterSpacing: "0em", fontWeight: "400" }],
+            "telemetry-metric": ["44px", { lineHeight: "48px", letterSpacing: "-0.03em", fontWeight: "500" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+      display: inline-block;
+    }
+    /* Hairline tactical styling */
+    .tactical-border {
+      border: 1px solid #304451;
+    }
+    .tactical-grid-bg {
+      background-size: 24px 24px;
+      background-image: 
+        linear-gradient(to right, rgba(48, 68, 81, 0.25) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(48, 68, 81, 0.25) 1px, transparent 1px);
+    }
+  </style>
+</head>
+<body class="bg-surface-container-low text-on-surface font-body-md antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-surface-container-lowest">
+<!-- ================= TOP APP BAR (SHARED COMPONENT) ================= -->
+<header class="w-full bg-surface-container-low dark:bg-surface-container-low border-b border-border-dark dark:border-border-dark sticky top-0 z-50">
+<div class="w-full max-w-[1200px] mx-auto flex items-center justify-between px-gutter-desktop h-16">
+<!-- Brand Identity -->
+<a class="flex items-center gap-3 active:opacity-90 transition-opacity" href="index.html" aria-label="RADAR INSIGHT 홈">
+<!-- Exact Brand Vector Emblem as per logo -->
+<div class="relative w-8 h-8 rounded-full bg-[#0C1822] border border-[#304451] flex items-center justify-center shrink-0">
+<div class="absolute inset-1 rounded-full border border-dashed border-[#5F806D]/60"></div>
+<div class="w-2.5 h-2.5 rounded-full border border-primary-container bg-transparent"></div>
+<div class="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-primary-container"></div>
+<div class="absolute w-3.5 h-[1.5px] bg-primary-container rotate-[-35deg] origin-left left-3.5 top-3.5"></div>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md tracking-tight font-bold text-on-surface dark:text-on-surface uppercase leading-none">
+            RADAR<span class="text-primary-container">INSIGHT</span>
+</span>
+<span class="font-caption text-caption text-text-secondary-dark tracking-widest text-[9px] uppercase mt-0.5">COASTAL DEFENSE TECH</span>
+</div>
+</a>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-8 h-full">
+<a class="h-full flex items-center font-headline-sm text-headline-sm uppercase tracking-wider text-text-secondary-dark dark:text-text-secondary-dark hover:text-on-surface dark:hover:text-on-surface hover:border-secondary transition-colors" href="index.html">Home</a>
+<a class="h-full flex items-center font-headline-sm text-headline-sm uppercase tracking-wider text-text-secondary-dark dark:text-text-secondary-dark hover:text-on-surface dark:hover:text-on-surface hover:border-secondary transition-colors" href="technology.html">Technology</a>
+<a class="h-full flex items-center font-headline-sm text-headline-sm uppercase tracking-wider text-text-secondary-dark dark:text-text-secondary-dark hover:text-on-surface dark:hover:text-on-surface hover:border-secondary transition-colors" href="c-20-n.html">C-20-N</a>
+<!-- ACTIVE NAVIGATION: Performance -->
+<a class="h-full flex items-center font-headline-sm text-headline-sm uppercase tracking-wider border-b-2 border-primary text-primary dark:text-primary font-semibold" href="performance.html">Performance</a>
+<a class="h-full flex items-center font-headline-sm text-headline-sm uppercase tracking-wider text-text-secondary-dark dark:text-text-secondary-dark hover:text-on-surface dark:hover:text-on-surface hover:border-secondary transition-colors" href="simulator.html">Simulator</a>
+</nav>
+<!-- Trailing Action Icons & Explore CTA -->
+<div class="flex items-center gap-3">
+<a class="w-9 h-9 flex items-center justify-center rounded-lg border border-border-dark text-text-secondary-dark hover:text-primary hover:border-primary-container transition-colors" href="simulator.html" aria-label="분석 보기" title="분석 보기">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+</a>
+<a class="w-9 h-9 flex items-center justify-center rounded-lg border border-border-dark text-text-secondary-dark hover:text-primary hover:border-primary-container transition-colors" href="simulator.html" aria-label="시뮬레이터 설정 보기" title="시뮬레이터 설정 보기">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</a>
+<a class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-primary-container text-surface-container-lowest font-label-field text-label-field font-bold uppercase active:scale-[0.98] transition-transform duration-100 hover:brightness-105" href="simulator.html">
+<span>Explore System</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+
+<!-- Mobile: all five pages remain accessible on narrow screens -->
+<nav aria-label="모바일 페이지 메뉴" class="md:hidden flex items-center gap-1 overflow-x-auto whitespace-nowrap px-3 py-2 border-t border-border-dark bg-surface-container-low" style="scrollbar-width:thin">
+<a href="index.html" class="flex-none px-3 py-1.5 rounded-sm text-[12px] font-semibold tracking-wide transition-colors text-text-secondary-dark hover:text-on-surface hover:bg-surface-container-high">Home</a>
+<a href="technology.html" class="flex-none px-3 py-1.5 rounded-sm text-[12px] font-semibold tracking-wide transition-colors text-text-secondary-dark hover:text-on-surface hover:bg-surface-container-high">Technology</a>
+<a href="c-20-n.html" class="flex-none px-3 py-1.5 rounded-sm text-[12px] font-semibold tracking-wide transition-colors text-text-secondary-dark hover:text-on-surface hover:bg-surface-container-high">C-20-N</a>
+<a href="performance.html" aria-current="page" class="flex-none px-3 py-1.5 rounded-sm text-[12px] font-semibold tracking-wide transition-colors bg-primary-container text-surface-container-lowest font-bold">Performance</a>
+<a href="simulator.html" class="flex-none px-3 py-1.5 rounded-sm text-[12px] font-semibold tracking-wide transition-colors text-text-secondary-dark hover:text-on-surface hover:bg-surface-container-high">Simulator</a>
+</nav>
+</header>
+<!-- ================= MAIN CONTENT CANVAS ================= -->
+<main class="w-full max-w-[1200px] mx-auto px-gutter-desktop py-8 flex-1 flex flex-col gap-8">
+<!-- BREADCRUMB & PAGE HEADER -->
+<section class="flex flex-col gap-2.5">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-telemetry-reticle uppercase tracking-wider bg-[rgba(95,128,109,0.15)] border border-[#5F806D] text-primary-container">
+          PAGE 04 // OPERATIONAL METRICS
+        </span>
+<span class="text-border-dark">/</span>
+<span class="font-telemetry-reticle text-[11px] uppercase tracking-wider text-text-secondary-dark">
+          PERFORMANCE BENCHMARK &amp; COMPARATIVE EVALUATION
+        </span>
+</div>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight font-bold">
+            C-20-N 탐지 성능 평가 및 18대 장비 대안 정밀 비교
+          </h1>
+<p class="font-body-md text-body-md text-text-secondary-dark mt-1 max-w-4xl">
+            임무 카드 2(항만 방호) 기준 205억 원 예산 하 5대 공중/해상 위협 대응 성능 및 타 아키텍처 대안과의 전술적 우위 검증 데이터
+          </p>
+</div>
+<div class="shrink-0 flex items-center gap-3">
+<div class="text-right">
+<span class="block font-telemetry-reticle text-[10px] uppercase text-text-secondary-dark">MISSION CLASSIFICATION</span>
+<span class="font-telemetry-data text-telemetry-data text-primary-container font-semibold">LEVEL-3 COASTAL CITADEL</span>
+</div>
+<div class="w-2.5 h-2.5 rounded-full bg-primary-container animate-pulse"></div>
+</div>
+</div>
+</section>
+<!-- MISSION BASELINE PARAMETERS BAR -->
+<section class="w-full bg-surface-container border border-border-dark rounded-lg p-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+<!-- Param 1 -->
+<div class="flex flex-col border-r border-border-dark/60 last:border-r-0 pr-3">
+<span class="font-telemetry-reticle text-caption uppercase text-text-secondary-dark tracking-wider">Mission Target</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-primary-container">shield</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">임무 카드 2 (항만 방호)</span>
+</div>
+</div>
+<!-- Param 2 -->
+<div class="flex flex-col border-r border-border-dark/60 last:border-r-0 pr-3">
+<span class="font-telemetry-reticle text-caption uppercase text-text-secondary-dark tracking-wider">Budget Ceiling</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-[#A3E870]">payments</span>
+<span class="font-headline-sm text-headline-sm text-primary-container font-bold font-telemetry-data">205억 원 (소진율 100%)</span>
+</div>
+</div>
+<!-- Param 3 -->
+<div class="flex flex-col border-r border-border-dark/60 last:border-r-0 pr-3">
+<span class="font-telemetry-reticle text-caption uppercase text-text-secondary-dark tracking-wider">Harbor Core Buffer</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-text-secondary-dark">radar</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold font-telemetry-data">5.0 km 안전 구역</span>
+</div>
+</div>
+<!-- Param 4 -->
+<div class="flex flex-col border-r border-border-dark/60 last:border-r-0 pr-3">
+<span class="font-telemetry-reticle text-caption uppercase text-text-secondary-dark tracking-wider">Evaluation Standard</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold font-telemetry-data">요구거리 Pd ≥ 89.95%</span>
+</div>
+</div>
+<!-- Param 5 -->
+<div class="flex flex-col pr-1 col-span-2 sm:col-span-1">
+<span class="font-telemetry-reticle text-caption uppercase text-text-secondary-dark tracking-wider">Baseline Weather</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-primary-container">wb_sunny</span>
+<span class="font-headline-sm text-headline-sm text-primary font-semibold">맑음 (Clear, 감쇄 없음)</span>
+</div>
+</div>
+</section>
+<!-- SECTION 1: C-20-N 5대 위협 탐지 성능 가로 바 차트 (SPLIT GRID WITH TACTICAL CANVAS) -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Left: Interactive Horizontal Bar Chart (65%) -->
+<div class="lg:col-span-8 bg-surface-container border border-border-dark rounded-lg p-6 flex flex-col gap-6 relative overflow-hidden">
+<!-- Header -->
+<div class="flex flex-wrap items-center justify-between gap-3 border-b border-border-dark pb-4">
+<div>
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 bg-primary-container rounded-sm"></span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">C-20-N 5대 공중/해상 위협 단일 스캔 탐지확률 (Pd)</h2>
+</div>
+<p class="font-caption text-caption text-text-secondary-dark mt-0.5">
+              요구 탐지거리(Dreq) 도달 시 1회 회전 스캔 기준 탐지율. 기준 임계선 Pd 89.95% 상회 여부
+            </p>
+</div>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center gap-1 text-[11px] font-telemetry-reticle text-text-secondary-dark">
+<span class="w-3 h-0.5 border-t-2 border-dashed border-primary"></span>
+              기준선 89.95% Pd
+            </span>
+</div>
+</div>
+<!-- Chart Grid Container -->
+<div class="relative flex flex-col gap-5 pt-3">
+<!-- Tactical Vertical Reference Line: Pd 89.95% -->
+<!-- Calculation: scale from 70% to 100%, 89.95% is at ((89.95 - 70) / 30) * 100 = 66.5% -->
+<div class="absolute top-0 bottom-4 left-[66.5%] z-20 pointer-events-none flex flex-col items-center">
+<div class="border-l border-dashed border-primary h-full opacity-80"></div>
+<div class="bg-surface-container-lowest border border-primary px-1.5 py-0.5 rounded text-[10px] font-telemetry-reticle text-primary mt-1 shadow-sm">
+              Pd 89.95% 기준선
+            </div>
+</div>
+<!-- Bar 1: Cruise Missile -->
+<div class="flex flex-col gap-1.5 group">
+<div class="flex items-center justify-between font-telemetry-data text-[13px]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary-container">navigation</span>
+<span class="font-semibold text-on-surface">순항미사일 (Cruise Missile)</span>
+<span class="text-text-secondary-dark text-caption font-telemetry-reticle">Dreq 21.50 km / RCS 0.1㎡</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-bold text-primary-container text-[15px]">Pd 94.83%</span>
+<span class="px-2 py-0.5 rounded bg-[rgba(95,128,109,0.25)] border border-[#5F806D] text-primary-container text-[11px] font-telemetry-reticle font-semibold">
+                  PASSED / 기준 충족
+                </span>
+</div>
+</div>
+<div class="w-full bg-[#0C1822] h-7 rounded border border-border-dark overflow-hidden flex relative p-0.5">
+<!-- Bar fill (scaled relative to 100%) -->
+<div class="bg-primary-container h-full rounded-sm transition-all duration-500 relative flex items-center justify-end pr-2" style="width: 94.83%;">
+<span class="text-[11px] font-telemetry-reticle text-surface-container-lowest font-bold">94.83%</span>
+</div>
+</div>
+</div>
+<!-- Bar 2: Large UAV -->
+<div class="flex flex-col gap-1.5 group">
+<div class="flex items-center justify-between font-telemetry-data text-[13px]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-text-secondary-dark">flight_takeoff</span>
+<span class="font-semibold text-on-surface">대형 무인기 (Large UAV)</span>
+<span class="text-text-secondary-dark text-caption font-telemetry-reticle">Dreq 8.60 km / RCS 1.0㎡</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-bold text-primary text-[15px]">Pd 99.99%</span>
+<span class="px-2 py-0.5 rounded bg-[rgba(95,128,109,0.25)] border border-[#5F806D] text-primary-container text-[11px] font-telemetry-reticle font-semibold">
+                  PASSED / 기준 충족
+                </span>
+</div>
+</div>
+<div class="w-full bg-[#0C1822] h-7 rounded border border-border-dark overflow-hidden flex relative p-0.5">
+<div class="bg-secondary-fixed h-full rounded-sm transition-all duration-500 relative flex items-center justify-end pr-2" style="width: 99.99%;">
+<span class="text-[11px] font-telemetry-reticle text-surface-container-lowest font-bold">99.99%</span>
+</div>
+</div>
+</div>
+<!-- Bar 3: Attack Helicopter -->
+<div class="flex flex-col gap-1.5 group">
+<div class="flex items-center justify-between font-telemetry-data text-[13px]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-text-secondary-dark">helicopter</span>
+<span class="font-semibold text-on-surface">공격헬기 (Attack Helicopter)</span>
+<span class="text-text-secondary-dark text-caption font-telemetry-reticle">Dreq 9.20 km / RCS 3.0㎡</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-bold text-primary text-[15px]">Pd 99.99%</span>
+<span class="px-2 py-0.5 rounded bg-[rgba(95,128,109,0.25)] border border-[#5F806D] text-primary-container text-[11px] font-telemetry-reticle font-semibold">
+                  PASSED / 기준 충족
+                </span>
+</div>
+</div>
+<div class="w-full bg-[#0C1822] h-7 rounded border border-border-dark overflow-hidden flex relative p-0.5">
+<div class="bg-secondary-fixed h-full rounded-sm transition-all duration-500 relative flex items-center justify-end pr-2" style="width: 99.99%;">
+<span class="text-[11px] font-telemetry-reticle text-surface-container-lowest font-bold">99.99%</span>
+</div>
+</div>
+</div>
+<!-- Bar 4: Small Drone -->
+<div class="flex flex-col gap-1.5 group">
+<div class="flex items-center justify-between font-telemetry-data text-[13px]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-text-secondary-dark">toys</span>
+<span class="font-semibold text-on-surface">소형 드론 (Small Drone)</span>
+<span class="text-text-secondary-dark text-caption font-telemetry-reticle">Dreq 6.80 km / RCS 0.01㎡</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-bold text-primary text-[15px]">Pd 99.84%</span>
+<span class="px-2 py-0.5 rounded bg-[rgba(95,128,109,0.25)] border border-[#5F806D] text-primary-container text-[11px] font-telemetry-reticle font-semibold">
+                  PASSED / 기준 충족
+                </span>
+</div>
+</div>
+<div class="w-full bg-[#0C1822] h-7 rounded border border-border-dark overflow-hidden flex relative p-0.5">
+<div class="bg-secondary-fixed h-full rounded-sm transition-all duration-500 relative flex items-center justify-end pr-2" style="width: 99.84%;">
+<span class="text-[11px] font-telemetry-reticle text-surface-container-lowest font-bold">99.84%</span>
+</div>
+</div>
+</div>
+<!-- Bar 5: Fighter Aircraft (UNMET / Operational Link) -->
+<div class="flex flex-col gap-1.5 group">
+<div class="flex items-center justify-between font-telemetry-data text-[13px]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-error">flight</span>
+<span class="font-semibold text-on-surface">전투기 (Fighter Aircraft)</span>
+<span class="text-text-secondary-dark text-caption font-telemetry-reticle">Dreq 56.00 km / RCS 5.0㎡</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-bold text-error text-[15px]">Pd 88.04%</span>
+<span class="px-2 py-0.5 rounded bg-error-container/40 border border-error/50 text-error text-[11px] font-telemetry-reticle font-semibold">
+                  UNMET / 미충족 (-1.91%p)
+                </span>
+</div>
+</div>
+<div class="w-full bg-[#0C1822] h-7 rounded border border-border-dark overflow-hidden flex relative p-0.5">
+<div class="bg-error/80 h-full rounded-sm transition-all duration-500 relative flex items-center justify-end pr-2" style="width: 88.04%;">
+<span class="text-[11px] font-telemetry-reticle text-surface-container-lowest font-bold">88.04%</span>
+</div>
+</div>
+<div class="flex items-start gap-1.5 text-[12px] text-text-secondary-dark mt-1 bg-surface-container-lowest p-2 rounded border border-border-dark">
+<span class="material-symbols-outlined text-[16px] text-primary-container shrink-0 mt-0.5">info</span>
+<span><strong>전술 보완 책무:</strong> 89.95% 기준선 미충족 분은 C4I 지상 조기경보 레이더망과의 Link-16 전술 데이터링크를 통해 탐지 표적을 유기적으로 이양받아 항만 방호 공백을 완전히 차단합니다.</span>
+</div>
+</div>
+</div>
+<!-- Scale Axis Footer -->
+<div class="pt-2 border-t border-border-dark/60 flex justify-between text-[11px] font-telemetry-reticle text-text-secondary-dark">
+<span>0%</span>
+<span>25%</span>
+<span>50%</span>
+<span>75%</span>
+<span class="text-primary font-bold">89.95% [기준치]</span>
+<span>100%</span>
+</div>
+</div>
+<!-- Right: Subsystem Telemetry & Tactical Mast Specs (35%) -->
+<div class="lg:col-span-4 flex flex-col gap-4">
+<!-- Tactical Mast Card -->
+<div class="bg-surface-container border border-border-dark rounded-lg p-5 flex flex-col gap-3">
+<div class="flex items-center justify-between border-b border-border-dark pb-3">
+<span class="font-telemetry-reticle text-[11px] uppercase tracking-wider text-text-secondary-dark">Mast Elevation Telemetry</span>
+<span class="px-2 py-0.5 rounded bg-primary-container/20 text-primary-container font-telemetry-reticle text-[10px]">ELEV: 20m</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-telemetry-metric text-telemetry-metric text-on-surface font-bold">20.0<span class="text-primary text-[24px]">m</span></span>
+<span class="text-caption text-text-secondary-dark">초고상 유압 마스트</span>
+</div>
+<p class="text-caption text-text-secondary-dark leading-relaxed">
+            해면 클러터(Sea Clutter) 수평선을 하향 투사하여 순항미사일(RCS 0.1㎡)의 시스키밍(Sea-Skimming) 저고도 비행 침투를 21.50km 외곽에서 완벽히 요격 포착합니다.
+          </p>
+<div class="grid grid-cols-2 gap-2 pt-2 border-t border-border-dark text-[12px] font-telemetry-reticle">
+<div class="bg-radar-canvas p-2 rounded border border-border-dark">
+<span class="block text-text-secondary-dark text-[10px]">수평선 시계 (Radar Horizon)</span>
+<span class="font-bold text-on-surface">31.4 km</span>
+</div>
+<div class="bg-radar-canvas p-2 rounded border border-border-dark">
+<span class="block text-text-secondary-dark text-[10px]">클러터 억제비 (SCR)</span>
+<span class="font-bold text-primary-container">+18.4 dB</span>
+</div>
+</div>
+</div>
+<!-- Mission Card 2 Scorecard -->
+<div class="bg-radar-canvas border border-border-dark rounded-lg p-5 flex flex-col gap-3">
+<span class="font-telemetry-reticle text-[11px] uppercase tracking-wider text-text-secondary-dark">임무 평가 총괄 요약</span>
+<div class="flex items-center justify-between">
+<span class="text-[13px] text-on-surface">5대 위협 중 기준 충족:</span>
+<span class="font-telemetry-data font-bold text-primary-container text-[16px]">4 / 5 위협 (80%)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded overflow-hidden">
+<div class="bg-primary-container h-full" style="width: 80%;"></div>
+</div>
+<span class="text-[11px] text-text-secondary-dark">
+            ※ 항만 핵심 위협인 순항미사일(94.83%) 및 소형/대형 무인기 요격선 확보. 205억 예산 한도 내 유일한 실전 최적해.
+          </span>
+</div>
+</div>
+</section>
+<!-- SECTION 2: ALTERNATIVE COMPARISON (DOCUMENT-GRADE LIGHT PANEL #F4F7F8) -->
+<section class="bg-surface-light border border-border-light rounded-lg p-6 md:p-8 text-text-on-light flex flex-col gap-6 shadow-none">
+<!-- Section Title & Subhead -->
+<div class="flex flex-col md:flex-row md:items-end justify-between border-b border-border-light pb-4 gap-4">
+<div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-badge-green-soft text-badge-text-green font-telemetry-reticle text-[11px] font-bold uppercase">
+              EXECUTIVE TRADE STUDY
+            </span>
+<span class="text-[12px] font-telemetry-reticle text-text-secondary-light">18 CANDIDATES EVALUATION MATRIX</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-text-on-light font-bold mt-1">
+            장비 대안 비교 분석 — 왜 C-20-N인가?
+          </h2>
+<p class="font-body-md text-body-md text-text-secondary-light mt-0.5">
+            205억 원 고정 예산 제약 조건 하에서 핵심 후보군 3종(C-20-N, B-10-F, C-10-F)의 탐지율 대안 비교
+          </p>
+</div>
+<!-- Analytical Badge -->
+<div class="bg-badge-green-soft px-3 py-2 rounded border border-[#C5D9BE] flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-badge-text-green">verified_user</span>
+<div class="text-left">
+<span class="block text-[11px] font-telemetry-reticle text-badge-text-green font-semibold">FINAL SELECTION:</span>
+<span class="font-bold text-[14px] text-badge-text-green">C-20-N 채택 완료</span>
+</div>
+</div>
+</div>
+<!-- Comparative Table / Architecture Cards (Bento-like 3-Column Grid) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<!-- CARD 1: C-20-N (채택안) -->
+<div class="bg-white rounded-lg border-2 border-primary-container p-5 flex flex-col justify-between relative shadow-sm">
+<div class="absolute -top-3 right-4 bg-primary-container text-surface-container-lowest font-telemetry-reticle text-[10px] font-bold px-2 py-0.5 rounded uppercase">
+            SELECTED / 최종 채택
+          </div>
+<div>
+<div class="flex items-center justify-between border-b border-border-light pb-3">
+<div>
+<span class="font-headline-md text-headline-md font-bold text-text-on-light">C-20-N</span>
+<span class="block text-[12px] text-text-secondary-light">고상 마스트형 C-Band</span>
+</div>
+<div class="text-right">
+<span class="font-telemetry-data font-bold text-[18px] text-text-on-light">205억 원</span>
+<span class="block text-[11px] font-telemetry-reticle text-badge-text-green font-semibold">예산 100% 최적 소진</span>
+</div>
+</div>
+<!-- Metric Breakdown -->
+<div class="py-4 space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-[13px] text-text-secondary-light">순항미사일 Pd:</span>
+<span class="font-telemetry-data font-bold text-[15px] text-badge-text-green">94.83% <span class="text-[11px] font-normal text-badge-text-green">[충족]</span></span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[13px] text-text-secondary-light">전투기 조기경보 Pd:</span>
+<span class="font-telemetry-data font-bold text-[15px] text-text-on-light">88.04% <span class="text-[11px] text-text-secondary-light">[최대 확보]</span></span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[13px] text-text-secondary-light">마스트 높이:</span>
+<span class="font-telemetry-reticle font-semibold text-text-on-light">20m 고상형</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[13px] text-text-secondary-light">항만 방호 적합도:</span>
+<span class="font-telemetry-reticle font-bold text-badge-text-green">OPTIMAL (최우수)</span>
+</div>
+</div>
+</div>
+<!-- Evaluation Outcome -->
+<div class="mt-4 pt-3 border-t border-border-light bg-[#F9FBFA] p-3 rounded">
+<span class="text-[12px] font-semibold text-badge-text-green block">판정: 최종 채택</span>
+<p class="text-[12px] text-text-on-light leading-snug mt-1">
+              순항미사일 필수 임무 완벽 충족(94.83%) 및 205억 예산 한도 내에서 전투기 조기경보 성능을 최대치로 균형 확보한 유일 대안.
+            </p>
+</div>
+</div>
+<!-- CARD 2: B-10-F (경쟁 후보 - 탈락) -->
+<div class="bg-white rounded-lg border border-border-light p-5 flex flex-col justify-between opacity-95">
+<div class="absolute -top-3 right-4 bg-border-light text-text-secondary-light font-telemetry-reticle text-[10px] font-bold px-2 py-0.5 rounded uppercase">
+            REJECTED / 탈락
+          </div>
+<div>
+<div class="flex items-center justify-between border-b border-border-light pb-3">
+<div>
+<span class="font-headline-md text-headline-md font-bold text-text-on-light">B-10-F</span>
+<span class="block text-[12px] text-text-secondary-light">단말형 B-Band 후보</span>
+</div>
+<div class="text-right">
+<span class="font-telemetry-data font-bold text-[18px] text-text-on-light">195억 원</span>
+<span class="block text-[11px] font-telemetry-reticle text-text-secondary-light">예산 잔여 10억 원</span>
+</div>
+</div>
+<!-- Metric Breakdown -->
+<div class="py-4 space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-[13px] text-text-secondary-light">순항미사일 Pd:</span>
+<span class="font-telemetry-data font-bold text-[15px] text-text-on-light">96.37% <span class="text-[11px] text-badge-text-green">[우수]</span></span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[13px] text-text-secondary-light">전투기 조기경보 Pd:</span>
+<span class="font-telemetry-data font-bold text-[15px] text-error-container">80.73% <span class="text-[11px] text-error-container">[-7.31%p 열세]</span></span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[13px] text-text-secondary-light">마스트 높이:</span>
+<span class="font-telemetry-reticle text-text-on-light">10m 고정형</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[13px] text-text-secondary-light">항만 방호 적합도:</span>
+<span class="font-telemetry-reticle text-text-secondary-light">SUB-OPTIMAL (취약)</span>
+</div>
+</div>
+</div>
+<!-- Evaluation Outcome -->
+<div class="mt-4 pt-3 border-t border-border-light bg-[#FFF8F8] p-3 rounded">
+<span class="text-[12px] font-semibold text-error-container block">판정: 전투기 조기경보 결함 탈락</span>
+<p class="text-[12px] text-text-secondary-light leading-snug mt-1">
+              순항미사일 탐지는 96.37%로 우수하나, 전투기 탐지율이 80.73%로 C-20-N 대비 7.31%p나 급락하여 항만 외곽 제공 감시망 붕괴.
+            </p>
+</div>
+</div>
+<!-- CARD 3: C-10-F (고성능 대안 - 예산 초과 탈락) -->
+<div class="bg-white rounded-lg border border-border-light p-5 flex flex-col justify-between opacity-85">
+<div class="absolute -top-3 right-4 bg-error-container text-white font-telemetry-reticle text-[10px] font-bold px-2 py-0.5 rounded uppercase">
+            OVER BUDGET / 예산 초과
+          </div>
+<div>
+<div class="flex items-center justify-between border-b border-border-light pb-3">
+<div>
+<span class="font-headline-md text-headline-md font-bold text-text-on-light">C-10-F</span>
+<span class="block text-[12px] text-text-secondary-light">고출력 멀티빔 대안</span>
+</div>
+<div class="text-right">
+<span class="font-telemetry-data font-bold text-[18px] text-error-container">255억 원</span>
+<span class="block text-[11px] font-telemetry-reticle text-error-container font-semibold">예산 50억 초과 (+24.4%)</span>
+</div>
+</div>
+<!-- Metric Breakdown -->
+<div class="py-4 space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-[13px] text-text-secondary-light">순항미사일 Pd:</span>
+<span class="font-telemetry-data font-bold text-[15px] text-text-on-light">98.68%</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[13px] text-text-secondary-light">전투기 조기경보 Pd:</span>
+<span class="font-telemetry-data font-bold text-[15px] text-text-on-light">93.81%</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[13px] text-text-secondary-light">마스트 높이:</span>
+<span class="font-telemetry-reticle text-text-on-light">10m 단말형</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[13px] text-text-secondary-light">재정 집행성:</span>
+<span class="font-telemetry-reticle text-error-container font-bold">비현실적 조달 불가</span>
+</div>
+</div>
+</div>
+<!-- Evaluation Outcome -->
+<div class="mt-4 pt-3 border-t border-border-light bg-[#FFF8F8] p-3 rounded">
+<span class="text-[12px] font-semibold text-error-container block">판정: 사업 예산 규정 위반 배제</span>
+<p class="text-[12px] text-text-secondary-light leading-snug mt-1">
+              단순 스펙은 전 영역 우수하나 사업 상한인 205억 원을 50억 원 초과하여 방위사업법 조달 규정상 즉시 실격 처리.
+            </p>
+</div>
+</div>
+</div>
+<!-- Decision Logic Callout Box -->
+<div class="bg-white border border-border-light rounded-lg p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<div class="flex items-start gap-3">
+<div class="w-9 h-9 rounded bg-badge-green-soft flex items-center justify-center shrink-0 text-badge-text-green">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-text-on-light">
+              핵심 전술적 의사결정 논리: 왜 단일 위협 극대화가 아닌 C-20-N인가?
+            </h3>
+<p class="text-[13px] text-text-secondary-light mt-0.5 max-w-3xl leading-relaxed">
+              항만 방호는 복합 전장 환경입니다. B-10-F처럼 순항미사일 단일 위협에만 스펙을 편중시키면 전투기 조기경보율이 80.73%로 떨어져 공중 침투에 치명적 허점이 생깁니다. C-20-N은 <strong>205억 원 예산 한도 내에서 순항미사일 저지 기준(Pd ≥ 89.95%)을 넘기면서도 전투기 조기경보율(88.04%)을 최상으로 유지하는 유일한 균형해</strong>입니다.
+            </p>
+</div>
+</div>
+<div class="shrink-0">
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-badge-green-soft font-telemetry-reticle text-[12px] text-badge-text-green font-bold">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+            OPERATIONAL PARETO OPTIMAL
+          </span>
+</div>
+</div>
+</section>
+<!-- SECTION 3: WEATHER SENSITIVITY MATRIX (기상 감쇄 민감도 분석 - 맑음 vs 강우) -->
+<section class="bg-surface-container border border-border-dark rounded-lg p-6 flex flex-col gap-6">
+<!-- Section Header with Weather Toggle Controls -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-dark pb-4">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary-container">thunderstorm</span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">
+              기상 감쇄 민감도 분석: 극한 환경 스트레스 테스트
+            </h2>
+</div>
+<p class="text-caption text-text-secondary-dark mt-0.5">
+            강우 시 전파 감쇄(-10%) 및 해면 클러터 증가 환경에서 C-20-N 고상 마스트와 경쟁 기종 B-10-F 간의 생존성 비교
+          </p>
+</div>
+<!-- Interactive State Toggle -->
+<div class="inline-flex p-1 rounded-lg bg-surface-container-lowest border border-border-dark shrink-0" role="tablist">
+<button class="px-4 py-1.5 rounded font-telemetry-reticle text-[12px] font-bold transition-all bg-primary-container text-surface-container-lowest flex items-center gap-1.5" id="toggle-clear" onclick="setWeather('clear')">
+<span class="material-symbols-outlined text-[16px]">wb_sunny</span>
+<span>CLEAR (맑음 - 기준)</span>
+</button>
+<button class="px-4 py-1.5 rounded font-telemetry-reticle text-[12px] font-semibold text-text-secondary-dark hover:text-on-surface transition-all flex items-center gap-1.5" id="toggle-rain" onclick="setWeather('rain')">
+<span class="material-symbols-outlined text-[16px]">rainy</span>
+<span>RAIN (강우 4mm/h, -10% 감쇄)</span>
+</button>
+</div>
+</div>
+<!-- Sensitivity Dynamic Comparative Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- C-20-N Weather Performance Card -->
+<div class="bg-surface-container-low border border-primary-container/40 rounded-lg p-5 flex flex-col gap-4">
+<div class="flex items-center justify-between border-b border-border-dark pb-3">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">C-20-N (20m 고상 마스트 탑재안)</span>
+</div>
+<span class="text-[11px] font-telemetry-reticle text-primary-container bg-primary-container/10 px-2 py-0.5 rounded border border-primary-container/30">
+              HIGH RESILIENCE
+            </span>
+</div>
+<!-- Dynamic Metric 1: Cruise Missile -->
+<div class="space-y-1.5">
+<div class="flex justify-between text-[13px] font-telemetry-data">
+<span class="text-text-secondary-dark">순항미사일 (Cruise Missile) 탐지율:</span>
+<span class="font-bold text-primary-container text-[15px]" id="c20n-cm-val">94.83%</span>
+</div>
+<div class="w-full bg-radar-canvas h-3 rounded overflow-hidden border border-border-dark">
+<div class="bg-primary-container h-full transition-all duration-300" id="c20n-cm-bar" style="width: 94.83%;"></div>
+</div>
+<div class="flex justify-between text-[11px] font-telemetry-reticle text-text-secondary-dark">
+<span id="c20n-cm-state">맑음: 최적 저지선 유지</span>
+<span class="text-primary-container" id="c20n-cm-delta">변동: 0.00%p</span>
+</div>
+</div>
+<!-- Dynamic Metric 2: Fighter Aircraft -->
+<div class="space-y-1.5 pt-2 border-t border-border-dark/60">
+<div class="flex justify-between text-[13px] font-telemetry-data">
+<span class="text-text-secondary-dark">전투기 (Fighter Aircraft) 조기경보율:</span>
+<span class="font-bold text-primary text-[15px]" id="c20n-fa-val">88.04%</span>
+</div>
+<div class="w-full bg-radar-canvas h-3 rounded overflow-hidden border border-border-dark">
+<div class="bg-secondary-fixed h-full transition-all duration-300" id="c20n-fa-bar" style="width: 88.04%;"></div>
+</div>
+<div class="flex justify-between text-[11px] font-telemetry-reticle text-text-secondary-dark">
+<span id="c20n-fa-state">맑음: 외곽 탐지망 가동</span>
+<span class="text-text-secondary-dark" id="c20n-fa-delta">변동: 0.00%p</span>
+</div>
+</div>
+<!-- Weather Advantage Insight -->
+<div class="bg-surface-container p-3 rounded border border-border-dark text-[12px] text-text-secondary-dark">
+<strong class="text-primary-container font-semibold">마스트 전술 이점:</strong> 20m 높이에서 내려다보는 시각축(Grazing Angle) 형성으로 강우 시 수면에서 반사되는 복합 다중 경로 간섭(Multipath)을 효과적으로 상쇄합니다.
+          </div>
+</div>
+<!-- B-10-F Weather Performance Card -->
+<div class="bg-surface-container-low border border-border-dark rounded-lg p-5 flex flex-col gap-4">
+<div class="flex items-center justify-between border-b border-border-dark pb-3">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-border-dark"></span>
+<span class="font-headline-sm text-headline-sm font-bold text-text-secondary-dark">B-10-F (10m 저상 고정형 후보안)</span>
+</div>
+<span class="text-[11px] font-telemetry-reticle text-error bg-error-container/20 px-2 py-0.5 rounded border border-error/30">
+              HIGH VULNERABILITY
+            </span>
+</div>
+<!-- Dynamic Metric 1: Cruise Missile -->
+<div class="space-y-1.5">
+<div class="flex justify-between text-[13px] font-telemetry-data">
+<span class="text-text-secondary-dark">순항미사일 (Cruise Missile) 탐지율:</span>
+<span class="font-bold text-on-surface text-[15px]" id="b10f-cm-val">96.37%</span>
+</div>
+<div class="w-full bg-radar-canvas h-3 rounded overflow-hidden border border-border-dark">
+<div class="bg-text-secondary-dark h-full transition-all duration-300" id="b10f-cm-bar" style="width: 96.37%;"></div>
+</div>
+<div class="flex justify-between text-[11px] font-telemetry-reticle text-text-secondary-dark">
+<span id="b10f-cm-state">맑음: 수치상 우수</span>
+<span class="text-text-secondary-dark" id="b10f-cm-delta">변동: 0.00%p</span>
+</div>
+</div>
+<!-- Dynamic Metric 2: Fighter Aircraft -->
+<div class="space-y-1.5 pt-2 border-t border-border-dark/60">
+<div class="flex justify-between text-[13px] font-telemetry-data">
+<span class="text-text-secondary-dark">전투기 (Fighter Aircraft) 조기경보율:</span>
+<span class="font-bold text-error text-[15px]" id="b10f-fa-val">80.73%</span>
+</div>
+<div class="w-full bg-radar-canvas h-3 rounded overflow-hidden border border-border-dark">
+<div class="bg-error/70 h-full transition-all duration-300" id="b10f-fa-bar" style="width: 80.73%;"></div>
+</div>
+<div class="flex justify-between text-[11px] font-telemetry-reticle text-text-secondary-dark">
+<span id="b10f-fa-state">맑음: 이미 기준치 미달</span>
+<span class="text-error" id="b10f-fa-delta">변동: 0.00%p</span>
+</div>
+</div>
+<!-- Vulnerability Callout -->
+<div class="bg-surface-container p-3 rounded border border-border-dark text-[12px] text-error/90">
+<strong class="font-semibold text-error">기상 취약점 경고:</strong> 10m 저상형 구조로 인해 우천 강우 시 해면 클러터와 빗방울 반사파가 뒤섞여, 전투기 조기경보율이 59.18%로 급락하는 심각한 감시 공백이 유발됩니다.
+          </div>
+</div>
+</div>
+<!-- Sensitivity Disclaimer Note -->
+<div class="flex items-center gap-2 p-3 bg-surface-container-lowest border border-border-dark/60 rounded text-[12px] text-text-secondary-dark">
+<span class="material-symbols-outlined text-[18px] text-primary-container">info</span>
+<span>
+<strong>평가 지침 규정:</strong> 공식 소요 평가는 맑음(Clear, 무감쇄) 조건이 법적 기준이며, 위 강우 조건은 극한 작전 환경에서의 강인성을 검증하기 위한 2단계 민감도 시뮬레이션 결과입니다.
+        </span>
+</div>
+</section>
+<!-- SECTION 4: RADARO AI ANALYST INSIGHT & SIMULATOR CTA BENTO -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
+<!-- RADARO AI Analyst Insight Box (7 cols) -->
+<div class="md:col-span-7 bg-surface-container border border-border-dark rounded-lg p-5 flex flex-col justify-between relative overflow-hidden">
+<!-- Tactical grid backdrop -->
+<div class="absolute inset-0 tactical-grid-bg opacity-30 pointer-events-none"></div>
+<div class="relative z-10">
+<div class="flex items-center justify-between border-b border-border-dark pb-3">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded bg-primary-container/20 border border-primary-container flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+</div>
+<div>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface flex items-center gap-1.5">
+                  RADARO AI ANALYST INSIGHT
+                  <span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-ping"></span>
+</span>
+<span class="text-[10px] font-telemetry-reticle text-text-secondary-dark uppercase">Defense Doctrine Engine v4.2</span>
+</div>
+</div>
+<span class="text-[11px] font-telemetry-reticle px-2 py-0.5 rounded bg-surface-container-lowest border border-border-dark text-primary">
+              CONFIDENCE: 98.4%
+            </span>
+</div>
+<!-- Insight Paragraph -->
+<div class="mt-4 space-y-2">
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+              "C-20-N의 <span class="text-primary-container font-semibold">20m 고상 마스트</span>는 악천후 시에도 해면 클러터 간섭을 대폭 줄여 순항미사일의 최저 저지선을 안정적으로 유지합니다."
+            </p>
+<p class="text-[13px] text-text-secondary-dark leading-relaxed">
+              B-10-F 후보의 경우 맑은 날 순항미사일 수치가 일견 1.54%p 높아 보이지만, 전술 시뮬레이션 결과 비가 내리는 순간 전투기 탐지율이 59%대까지 폭락합니다. 단일 위협의 미세한 수치 우위보다 <strong>전천후 전술 신뢰성과 5대 위협 종합 저지선</strong>을 고려할 때 C-20-N은 방호 사령부의 유일무이한 합리적 선택입니다.
+            </p>
+</div>
+</div>
+<div class="relative z-10 pt-4 mt-4 border-t border-border-dark flex items-center justify-between text-[11px] font-telemetry-reticle text-text-secondary-dark">
+<span>SOURCE: ROK-N-DOD MISSION CARD 2 COMPLIANCE</span>
+<span class="text-primary-container">VERIFIED TELEMETRY</span>
+</div>
+</div>
+<!-- Simulator Direct Action Card (5 cols) -->
+<div class="md:col-span-5 bg-gradient-to-br from-surface-container to-radar-canvas border border-[#5F806D]/60 rounded-lg p-6 flex flex-col justify-between" id="simulator">
+<div>
+<div class="flex items-center gap-2 text-primary-container">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+<span class="font-telemetry-reticle text-[11px] uppercase tracking-wider font-semibold">INTERACTIVE TESTBENCH</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg font-bold text-on-surface mt-2">
+            18개 장비 조합 직접 시뮬레이션
+          </h3>
+<p class="text-body-md text-body-md text-text-secondary-dark mt-2 leading-relaxed">
+            마스트 높이(10m/20m/30m), 주파수 대역(S/C/X-Band), 빔포밍 안테나 출력 파라미터를 조작하여 방호 시나리오별 탐지확률을 실시간 연산해보십시오.
+          </p>
+</div>
+<div class="mt-6 flex flex-col gap-3">
+<a class="w-full py-3.5 px-5 rounded bg-primary-container text-surface-container-lowest font-headline-sm text-headline-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:brightness-105 active:scale-[0.98] transition-all" href="simulator.html">
+<span>대화형 시뮬레이터에서 18개 조합 직접 검증하기</span>
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+</a>
+<span class="text-center font-telemetry-reticle text-[11px] text-text-secondary-dark">
+            실시간 몬테카를로 10,000회 시뮬레이션 엔진 연동
+          </span>
+</div>
+</div>
+</section>
+</main>
+<!-- ================= FOOTER (SHARED DEFENSE DISCLAIMER COMPONENT) ================= -->
+<footer class="w-full bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-border-dark dark:border-border-dark">
+<div class="w-full border-t border-border-dark dark:border-border-dark py-8 px-gutter-desktop max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<!-- Brand & Copyright -->
+<div class="flex flex-col md:flex-row items-center gap-3 text-center md:text-left">
+<span class="font-headline-sm text-headline-sm tracking-tight text-on-surface dark:text-on-surface font-bold">
+          RADAR<span class="text-primary-container">INSIGHT</span>
+</span>
+<span class="hidden md:inline text-border-dark">|</span>
+<p class="font-caption text-caption uppercase tracking-widest text-text-secondary-dark dark:text-text-secondary-dark">
+          © 2025 RADAR INSIGHT DEFENSE SYSTEMS. ALL RIGHTS RESERVED. ITAR CONTROLLED TECHNICAL SPECIFICATIONS.
+        </p>
+</div>
+<!-- Defense Compliance Nav Links -->
+<div class="flex flex-wrap justify-center items-center gap-5 font-caption text-caption uppercase tracking-widest text-text-secondary-dark dark:text-text-secondary-dark">
+<span title="안내 문서 준비 중" class="hover:text-primary dark:hover:text-primary transition-colors">Security Classification</span>
+<span title="안내 문서 준비 중" class="hover:text-primary dark:hover:text-primary transition-colors">Terms of Deployment</span>
+<span title="안내 문서 준비 중" class="hover:text-primary dark:hover:text-primary transition-colors">Compliance Protocol</span>
+<span title="안내 문서 준비 중" class="hover:text-primary dark:hover:text-primary transition-colors">Telemetry Logs</span>
+<span title="안내 문서 준비 중" class="hover:text-primary dark:hover:text-primary transition-colors">Privacy Directive</span>
+</div>
+</div>
+</footer>
+<!-- ================= JAVASCRIPT MICRO-INTERACTIONS (WEATHER SENSITIVITY TOGGLE) ================= -->
+<script>
+    function setWeather(mode) {
+      const btnClear = document.getElementById('toggle-clear');
+      const btnRain = document.getElementById('toggle-rain');
+
+      // C-20-N Elements
+      const c20nCmVal = document.getElementById('c20n-cm-val');
+      const c20nCmBar = document.getElementById('c20n-cm-bar');
+      const c20nCmState = document.getElementById('c20n-cm-state');
+      const c20nCmDelta = document.getElementById('c20n-cm-delta');
+
+      const c20nFaVal = document.getElementById('c20n-fa-val');
+      const c20nFaBar = document.getElementById('c20n-fa-bar');
+      const c20nFaState = document.getElementById('c20n-fa-state');
+      const c20nFaDelta = document.getElementById('c20n-fa-delta');
+
+      // B-10-F Elements
+      const b10fCmVal = document.getElementById('b10f-cm-val');
+      const b10fCmBar = document.getElementById('b10f-cm-bar');
+      const b10fCmState = document.getElementById('b10f-cm-state');
+      const b10fCmDelta = document.getElementById('b10f-cm-delta');
+
+      const b10fFaVal = document.getElementById('b10f-fa-val');
+      const b10fFaBar = document.getElementById('b10f-fa-bar');
+      const b10fFaState = document.getElementById('b10f-fa-state');
+      const b10fFaDelta = document.getElementById('b10f-fa-delta');
+
+      if (mode === 'rain') {
+        // Toggle Buttons visual state
+        btnRain.className = "px-4 py-1.5 rounded font-telemetry-reticle text-[12px] font-bold transition-all bg-primary-container text-surface-container-lowest flex items-center gap-1.5";
+        btnClear.className = "px-4 py-1.5 rounded font-telemetry-reticle text-[12px] font-semibold text-text-secondary-dark hover:text-on-surface transition-all flex items-center gap-1.5";
+
+        // C-20-N in Rain
+        c20nCmVal.innerText = "88.20%";
+        c20nCmBar.style.width = "88.20%";
+        c20nCmState.innerText = "우천: 고상 마스트로 최소 요격선 수호";
+        c20nCmDelta.innerText = "감쇄: -6.63%p";
+        c20nCmDelta.className = "text-text-secondary-dark";
+
+        c20nFaVal.innerText = "73.06%";
+        c20nFaBar.style.width = "73.06%";
+        c20nFaState.innerText = "우천: 데이터링크 연동으로 감시망 보강";
+        c20nFaDelta.innerText = "감쇄: -14.98%p";
+        c20nFaDelta.className = "text-text-secondary-dark";
+
+        // B-10-F in Rain
+        b10fCmVal.innerText = "91.86%";
+        b10fCmBar.style.width = "91.86%";
+        b10fCmState.innerText = "우천: 수치 하락";
+        b10fCmDelta.innerText = "감쇄: -4.51%p";
+
+        b10fFaVal.innerText = "59.18%";
+        b10fFaBar.style.width = "59.18%";
+        b10fFaBar.className = "bg-error h-full transition-all duration-300";
+        b10fFaState.innerText = "경보 실패! 해면 클러터 간섭으로 실명 상태";
+        b10fFaDelta.innerText = "감쇄: -21.55%p [치명적 결함]";
+        b10fFaDelta.className = "text-error font-bold";
+
+      } else {
+        // Clear (Baseline)
+        btnClear.className = "px-4 py-1.5 rounded font-telemetry-reticle text-[12px] font-bold transition-all bg-primary-container text-surface-container-lowest flex items-center gap-1.5";
+        btnRain.className = "px-4 py-1.5 rounded font-telemetry-reticle text-[12px] font-semibold text-text-secondary-dark hover:text-on-surface transition-all flex items-center gap-1.5";
+
+        // C-20-N in Clear
+        c20nCmVal.innerText = "94.83%";
+        c20nCmBar.style.width = "94.83%";
+        c20nCmState.innerText = "맑음: 최적 저지선 유지";
+        c20nCmDelta.innerText = "변동: 0.00%p";
+        c20nCmDelta.className = "text-primary-container";
+
+        c20nFaVal.innerText = "88.04%";
+        c20nFaBar.style.width = "88.04%";
+        c20nFaState.innerText = "맑음: 외곽 탐지망 가동";
+        c20nFaDelta.innerText = "변동: 0.00%p";
+        c20nFaDelta.className = "text-text-secondary-dark";
+
+        // B-10-F in Clear
+        b10fCmVal.innerText = "96.37%";
+        b10fCmBar.style.width = "96.37%";
+        b10fCmState.innerText = "맑음: 수치상 우수";
+        b10fCmDelta.innerText = "변동: 0.00%p";
+
+        b10fFaVal.innerText = "80.73%";
+        b10fFaBar.style.width = "80.73%";
+        b10fFaBar.className = "bg-error/70 h-full transition-all duration-300";
+        b10fFaState.innerText = "맑음: 이미 기준치 미달";
+        b10fFaDelta.innerText = "변동: 0.00%p";
+        b10fFaDelta.className = "text-error";
+      }
+    }
+  </script>
+</body></html>

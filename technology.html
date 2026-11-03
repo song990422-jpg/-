@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PAGE 02 — TECHNOLOGY: 레이더 탐지 원리와 기술 설명 | RADAR INSIGHT</title>
+<!-- Google Fonts: Noto Sans & IBM Plex Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;family=Noto+Sans+KR:wght@300;400;500;600;700;800&amp;family=Noto+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container": "#14212d",
+            "surface": "#071420",
+            "primary": "#d3ffaf",
+            "outline-variant": "#41493a",
+            "badge-green-soft": "#E0EED8",
+            "on-primary": "#173800",
+            "on-primary-container": "#326900",
+            "radar-canvas": "#0C1822",
+            "surface-variant": "#293643",
+            "on-surface-variant": "#c1c9b5",
+            "surface-container-highest": "#293643",
+            "primary-container": "#a3e870",
+            "text-secondary-light": "#526876",
+            "tertiary-fixed-dim": "#b7c9da",
+            "on-secondary": "#173627",
+            "error": "#ffb4ab",
+            "on-secondary-container": "#9ec0ab",
+            "background": "#071420",
+            "on-surface": "#d6e4f5",
+            "text-on-light": "#142B40",
+            "surface-container-high": "#1e2b38",
+            "on-background": "#d6e4f5",
+            "border-dark": "#304451",
+            "surface-container-lowest": "#030f1b",
+            "inverse-primary": "#336b00",
+            "on-primary-fixed-variant": "#255100",
+            "surface-dim": "#071420",
+            "secondary": "#abcfb9",
+            "surface-container-low": "#101d29",
+            "text-secondary-dark": "#AFBEC8",
+            "on-primary-fixed": "#0b2000",
+            "secondary-container": "#30503f",
+            "error-container": "#93000a",
+            "tertiary-container": "#c5d7e9",
+            "secondary-fixed": "#c7ebd4",
+            "on-tertiary": "#213240",
+            "on-tertiary-container": "#4d5e6d",
+            "surface-light": "#F4F7F8",
+            "border-light": "#CFDADF",
+            "tertiary": "#e8f3ff",
+            "tertiary-fixed": "#d3e5f6",
+            "primary-fixed": "#b0f67c",
+            "on-error-container": "#ffdad6",
+            "on-secondary-fixed-variant": "#2e4d3d",
+            "on-tertiary-fixed": "#0b1d2a",
+            "secondary-fixed-dim": "#abcfb9",
+            "surface-tint": "#95d963",
+            "on-secondary-fixed": "#002113",
+            "inverse-on-surface": "#25323e",
+            "on-tertiary-fixed-variant": "#384957",
+            "primary-fixed-dim": "#95d963",
+            "on-error": "#690005",
+            "outline": "#8b9381",
+            "surface-bright": "#2e3a47",
+            "badge-text-green": "#325B3A",
+            "inverse-surface": "#d6e4f5"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "space-3xl": "4rem",
+            "gutter-desktop": "1.5rem",
+            "margin": "1.25rem",
+            "space-2xl": "3rem",
+            "space-lg": "1.5rem",
+            "gutter": "1rem",
+            "space-sm": "0.5rem",
+            "margin-desktop": "2rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2rem"
+          },
+          "fontFamily": {
+            "display-hero": ["Noto Sans", "Noto Sans KR", "sans-serif"],
+            "telemetry-metric": ["IBM Plex Mono", "monospace"],
+            "headline-sm": ["Noto Sans", "Noto Sans KR", "sans-serif"],
+            "body-md": ["Noto Sans", "Noto Sans KR", "sans-serif"],
+            "display-hero-mobile": ["Noto Sans", "Noto Sans KR", "sans-serif"],
+            "telemetry-data": ["IBM Plex Mono", "monospace"],
+            "telemetry-metric-mobile": ["IBM Plex Mono", "monospace"],
+            "caption": ["Noto Sans", "Noto Sans KR", "sans-serif"],
+            "telemetry-reticle": ["IBM Plex Mono", "monospace"],
+            "headline-md": ["Noto Sans", "Noto Sans KR", "sans-serif"],
+            "headline-lg": ["Noto Sans", "Noto Sans KR", "sans-serif"],
+            "body-lg": ["Noto Sans", "Noto Sans KR", "sans-serif"],
+            "label-field": ["Noto Sans", "Noto Sans KR", "sans-serif"]
+          },
+          "fontSize": {
+            "display-hero": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "telemetry-metric": ["44px", { "lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "500" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "display-hero-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "telemetry-data": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+            "telemetry-metric-mobile": ["32px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+            "caption": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "telemetry-reticle": ["11px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "700" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "label-field": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      display: inline-block;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* Hairline technical radar grid lines */
+    .radar-grid-bg {
+      background-image: 
+        linear-gradient(to right, rgba(48, 68, 81, 0.25) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(48, 68, 81, 0.25) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary font-body-md text-body-md antialiased">
+<!-- TopNavBar (Shared Component JSON Blueprint) -->
+<header class="w-full bg-surface-container-low border-b border-border-dark sticky top-0 z-50">
+<div class="w-full max-w-[1200px] mx-auto flex items-center justify-between px-gutter-desktop h-16">
+<!-- Brand Logo Anchor -->
+<a class="flex items-center gap-3 active:scale-[0.98] transition-transform duration-100" href="index.html">
+<img alt="RADAR INSIGHT System Emblem" class="w-8 h-8 rounded-sm object-cover border border-border-dark" src="https://lh3.googleusercontent.com/aida/AEtjO1VVrsOZjrY2cO4BC1GfNF2QeqfXfEWanswU5ddK8kmR7jxii44ByRq57ZVyhQhT1E2iNJpovsESsNTMndH2j9uEB2oIhZhjbWYpm07NK4MdBL3I6DJVu1wcacdBvwTSuTyWjiiHaF_IpfdwDXW9Z0HBGoSZ4aJ6joj8oVYysavawP6KmdD791jTCNM-VCI12o4EEw0pj0T_s-4BADtodw0N13IbMBS61TFUuw3GpzIR"/>
+<span class="font-headline-md text-headline-md tracking-tight font-bold text-on-surface uppercase">RADAR INSIGHT</span>
+</a>
+<!-- Desktop Navigation Links (Technology Active) -->
+<nav class="hidden md:flex items-center space-x-6 font-headline-sm text-headline-sm uppercase tracking-wider h-full">
+<a class="text-text-secondary-dark hover:text-on-surface hover:border-secondary transition-colors h-full flex items-center px-1" href="index.html">Home</a>
+<a class="border-b-2 border-primary text-primary font-semibold transition-colors h-full flex items-center px-1" href="technology.html">Technology</a>
+<a class="text-text-secondary-dark hover:text-on-surface hover:border-secondary transition-colors h-full flex items-center px-1" href="c-20-n.html">C-20-N</a>
+<a class="text-text-secondary-dark hover:text-on-surface hover:border-secondary transition-colors h-full flex items-center px-1" href="performance.html">Performance</a>
+<a class="text-text-secondary-dark hover:text-on-surface hover:border-secondary transition-colors h-full flex items-center px-1" href="simulator.html">Simulator</a>
+</nav>
+<!-- Trailing Action & Subsystem Controls -->
+<div class="flex items-center gap-3">
+<div class="flex items-center space-x-1 text-text-secondary-dark">
+<a class="p-2 hover:text-primary transition-colors active:scale-[0.98]" href="#ai-quote" aria-label="분석 보기" title="분석 보기">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+</a>
+<a class="p-2 hover:text-primary transition-colors active:scale-[0.98]" href="#btn-target-cruise" aria-label="시뮬레이터 설정 보기" title="시뮬레이터 설정 보기">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+</a>
+</div>
+<a class="bg-primary-container text-on-primary font-headline-sm text-headline-sm uppercase tracking-wider px-4 py-2 rounded-lg font-bold hover:brightness-105 active:scale-[0.98] transition-all flex items-center gap-2" href="simulator.html" aria-label="시뮬레이터 열기">
+<span>Explore System</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+
+<!-- Mobile: all five pages remain accessible on narrow screens -->
+<nav aria-label="모바일 페이지 메뉴" class="md:hidden flex items-center gap-1 overflow-x-auto whitespace-nowrap px-3 py-2 border-t border-border-dark bg-surface-container-low" style="scrollbar-width:thin">
+<a href="index.html" class="flex-none px-3 py-1.5 rounded-sm text-[12px] font-semibold tracking-wide transition-colors text-text-secondary-dark hover:text-on-surface hover:bg-surface-container-high">Home</a>
+<a href="technology.html" aria-current="page" class="flex-none px-3 py-1.5 rounded-sm text-[12px] font-semibold tracking-wide transition-colors bg-primary-container text-surface-container-lowest font-bold">Technology</a>
+<a href="c-20-n.html" class="flex-none px-3 py-1.5 rounded-sm text-[12px] font-semibold tracking-wide transition-colors text-text-secondary-dark hover:text-on-surface hover:bg-surface-container-high">C-20-N</a>
+<a href="performance.html" class="flex-none px-3 py-1.5 rounded-sm text-[12px] font-semibold tracking-wide transition-colors text-text-secondary-dark hover:text-on-surface hover:bg-surface-container-high">Performance</a>
+<a href="simulator.html" class="flex-none px-3 py-1.5 rounded-sm text-[12px] font-semibold tracking-wide transition-colors text-text-secondary-dark hover:text-on-surface hover:bg-surface-container-high">Simulator</a>
+</nav>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-[1200px] mx-auto px-gutter-desktop py-8 space-y-12">
+<!-- Hero Section: Radar Detection Physics & Principles -->
+<section class="border border-border-dark bg-surface-container-low rounded-lg p-6 md:p-8 relative overflow-hidden radar-grid-bg">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border-dark pb-5 mb-6">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-[rgba(95,128,109,0.15)] border border-[#5F806D] text-primary-container font-telemetry-reticle text-telemetry-reticle tracking-widest uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+          RADAR SCIENCE &amp; THEORETICAL FORMULAS // TECH BRIEF
+        </div>
+<div class="font-telemetry-data text-telemetry-data text-text-secondary-dark flex items-center gap-4">
+<span>SYS_CLOCK: UTC 08:44:19</span>
+<span class="text-primary-container">● RF_CHANNEL_01: ACTIVE</span>
+</div>
+</div>
+<div class="max-w-3xl space-y-4">
+<h1 class="font-display-hero text-display-hero tracking-tight text-on-surface">
+          레이더 탐지 공학과 물리적 원리 분석
+        </h1>
+<p class="font-body-lg text-body-lg text-text-secondary-dark">
+          표적 접근 속도, 레이더 방정식(R0 &amp; R50), 지구 곡률 수평선(Dh), 1회 스캔 탐지확률(Pd)의 상호 연계 구조를 규명합니다.
+        </p>
+</div>
+<!-- Educational Disclaimer Banner -->
+<div class="mt-6 p-4 rounded bg-radar-canvas border border-border-dark flex items-start gap-3">
+<span class="material-symbols-outlined text-primary-container mt-0.5" data-icon="info">info</span>
+<p class="font-caption text-caption text-text-secondary-dark leading-relaxed">
+          ※ 본 페이지의 수식 및 그래프는 교육용 시뮬레이션 모델 기반이며, 비인가 군용 제원이 아닌 공개된 전파 전파(Wave Propagation) 공학 이론에 근거합니다. 해안 기지국 마스트 고도와 타깃 레이더 유효 반사면적(RCS)에 따른 실시간 계산 메커니즘을 제공합니다.
+        </p>
+</div>
+</section>
+<!-- 4 Core Pillars Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Pillar 01: Required Distance (Dreq) -->
+<section class="bg-surface-container border border-border-dark rounded-lg p-6 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between border-b border-border-dark pb-3 mb-4">
+<div class="flex items-center gap-2">
+<span class="font-telemetry-reticle text-telemetry-reticle text-primary-container px-2 py-0.5 rounded bg-[rgba(95,128,109,0.2)] border border-[#5F806D]">PILLAR 01</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Required Distance (요구 탐지거리 Dreq)</h2>
+</div>
+<span class="material-symbols-outlined text-text-secondary-dark" data-icon="straighten">straighten</span>
+</div>
+<!-- Formula Box -->
+<div class="bg-radar-canvas border border-border-dark p-4 rounded mb-5">
+<div class="font-caption text-caption text-text-secondary-dark uppercase tracking-wider mb-1">Mathematical Formula</div>
+<div class="font-telemetry-metric text-headline-lg text-primary-container tracking-wide font-medium">
+              Dreq = 5 + V_target × max(T_reaction - T_reduction, 0) / 1000
+            </div>
+</div>
+<p class="font-body-md text-body-md text-text-secondary-dark mb-4">
+            표적 접근 속도(<span class="text-on-surface font-telemetry-data">V_target, m/s</span>), 대응 체계 지휘 반응 시간(<span class="text-on-surface font-telemetry-data">T_reaction, s</span>), 그리고 AI 연동 지능형 경보 단축 패키지(<span class="text-on-surface font-telemetry-data">T_reduction, s</span>)를 결합하여 항만 외곽 최소 방어 반경(5km) 이전에 요격을 보장하는 기준 거리입니다.
+          </p>
+<!-- Tactical Diagram Representation -->
+<div class="bg-surface-container-low border border-border-dark p-4 rounded space-y-3 font-telemetry-data text-telemetry-data">
+<div class="flex justify-between items-center text-caption text-text-secondary-dark border-b border-border-dark pb-2">
+<span>TACTICAL PERIMETER SCHEMATIC</span>
+<span class="text-primary-container font-mono">5.0km PORT CORE BUFFER</span>
+</div>
+<div class="relative h-20 w-full flex items-center px-4 bg-radar-canvas rounded border border-border-dark overflow-hidden">
+<div class="absolute left-6 w-3 h-3 rounded-full bg-primary-container"></div>
+<span class="absolute left-11 text-caption text-primary-container font-mono">PORT (0km)</span>
+<!-- Defense Zone 5km -->
+<div class="absolute left-32 h-10 w-24 border border-dashed border-[#5F806D] flex items-center justify-center text-caption text-[#5F806D]">
+                5km BUFFER
+              </div>
+<!-- Dreq line -->
+<div class="absolute left-60 right-6 h-0.5 bg-[#5F806D]"></div>
+<div class="absolute right-6 flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[16px]" data-icon="navigation">navigation</span>
+<span class="text-caption font-bold">V_TARGET</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-border-dark flex items-center justify-between text-caption font-telemetry-data text-text-secondary-dark">
+<span>PARAM: T_reaction=12s | T_reduction=4s</span>
+<span class="text-primary-container">DELTA: -33.3% WARNING DELAY</span>
+</div>
+</section>
+<!-- Pillar 02: R50 Radar Equation -->
+<section class="bg-surface-container border border-border-dark rounded-lg p-6 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between border-b border-border-dark pb-3 mb-4">
+<div class="flex items-center gap-2">
+<span class="font-telemetry-reticle text-telemetry-reticle text-primary-container px-2 py-0.5 rounded bg-[rgba(95,128,109,0.2)] border border-[#5F806D]">PILLAR 02</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">R50 Radar Equation (50% 탐지거리)</h2>
+</div>
+<span class="material-symbols-outlined text-text-secondary-dark" data-icon="radar">radar</span>
+</div>
+<!-- Formula Box -->
+<div class="bg-radar-canvas border border-border-dark p-4 rounded mb-5">
+<div class="font-caption text-caption text-text-secondary-dark uppercase tracking-wider mb-1">Radar Equation Range Law</div>
+<div class="font-telemetry-metric text-headline-lg text-primary-container tracking-wide font-medium">
+              R50 = R0 × (RCS)^(1/4) × Weather_Factor
+            </div>
+<div class="mt-1 font-telemetry-reticle text-telemetry-reticle text-text-secondary-dark flex gap-4">
+<span>Clear (맑음): 1.0</span>
+<span>Rain (강우 4mm/h): 0.9</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-text-secondary-dark mb-4">
+            레이더 방정식의 핵심인 <strong class="text-on-surface">RCS 4제곱근 비례 법칙</strong>에 의해 유효 반사 면적이 16배 증가해야 물리적 탐지거리는 2배로 확장됩니다. 스텔스 표적(0.01m²)과 수상 함정(5.0m²)의 R50 편차를 결정합니다.
+          </p>
+<!-- Interactive Comparative Curve Table -->
+<div class="bg-surface-container-low border border-border-dark rounded overflow-hidden">
+<table class="w-full text-left font-telemetry-data text-telemetry-data">
+<thead class="bg-radar-canvas text-caption text-text-secondary-dark border-b border-border-dark uppercase">
+<tr>
+<th class="py-2 px-3 font-semibold">Target Type</th>
+<th class="py-2 px-3 font-semibold">RCS (m²)</th>
+<th class="py-2 px-3 font-semibold">Clear R50</th>
+<th class="py-2 px-3 font-semibold text-primary-container">Rain (0.9)</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-dark">
+<tr>
+<td class="py-2 px-3 text-on-surface">Stealth Missile</td>
+<td class="py-2 px-3 text-text-secondary-dark">0.01 m²</td>
+<td class="py-2 px-3">9.49 km</td>
+<td class="py-2 px-3 text-primary-container">8.54 km</td>
+</tr>
+<tr>
+<td class="py-2 px-3 text-on-surface">Sub-ASM Cruise</td>
+<td class="py-2 px-3 text-text-secondary-dark">0.10 m²</td>
+<td class="py-2 px-3">16.87 km</td>
+<td class="py-2 px-3 text-primary-container">15.18 km</td>
+</tr>
+<tr>
+<td class="py-2 px-3 text-on-surface">Patrol Fast Boat</td>
+<td class="py-2 px-3 text-text-secondary-dark">2.00 m²</td>
+<td class="py-2 px-3">35.64 km</td>
+<td class="py-2 px-3 text-primary-container">32.07 km</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-border-dark flex items-center justify-between text-caption font-telemetry-data text-text-secondary-dark">
+<span>BASELINE R0 (1m² RCS 기준): 30.0 km</span>
+<span class="text-primary-container">4TH-ROOT SENSITIVITY VALIDATED</span>
+</div>
+</section>
+<!-- Pillar 03: Radar Horizon & Earth Curvature -->
+<section class="bg-surface-container border border-border-dark rounded-lg p-6 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between border-b border-border-dark pb-3 mb-4">
+<div class="flex items-center gap-2">
+<span class="font-telemetry-reticle text-telemetry-reticle text-primary-container px-2 py-0.5 rounded bg-[rgba(95,128,109,0.2)] border border-[#5F806D]">PILLAR 03</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Radar Horizon &amp; Earth Curvature (수평선 Dh)</h2>
+</div>
+<span class="material-symbols-outlined text-text-secondary-dark" data-icon="public">public</span>
+</div>
+<!-- Formula Box -->
+<div class="bg-radar-canvas border border-border-dark p-4 rounded mb-5">
+<div class="font-caption text-caption text-text-secondary-dark uppercase tracking-wider mb-1">Geometric Line-Of-Sight Formula</div>
+<div class="font-telemetry-metric text-headline-lg text-primary-container tracking-wide font-medium">
+              Dh = 4.12 × (√h_antenna + √h_target) (km)
+            </div>
+<div class="mt-1 font-telemetry-reticle text-telemetry-reticle text-text-secondary-dark">
+              Standard 4/3 Equivalent Earth Radius Model
+            </div>
+</div>
+<p class="font-body-md text-body-md text-text-secondary-dark mb-4">
+            초저고도 시스키밍(Sea-skimming, 5m~10m) 위협은 지구 곡률 뒷편에 은폐되어 진입합니다. 안테나 설치 마스트의 고도(<span class="text-on-surface font-telemetry-data">h_antenna</span>)가 시선 가시거리(LOS) 확보의 물리적 한계를 좌우합니다.
+          </p>
+<!-- Elevation Comparison Card -->
+<div class="grid grid-cols-3 gap-3 bg-radar-canvas p-4 rounded border border-border-dark font-telemetry-data">
+<div class="border border-border-dark p-3 rounded bg-surface-container">
+<div class="text-caption text-text-secondary-dark">MAST 4m (초소)</div>
+<div class="text-headline-md text-on-surface my-1">17.4 km</div>
+<div class="text-caption text-error">경보 시간: +0.0s</div>
+</div>
+<div class="border border-border-dark p-3 rounded bg-surface-container">
+<div class="text-caption text-text-secondary-dark">MAST 10m (표준)</div>
+<div class="text-headline-md text-on-surface my-1">22.2 km</div>
+<div class="text-caption text-secondary">+16.0s 조기경보</div>
+</div>
+<div class="border border-primary-container p-3 rounded bg-surface-container relative">
+<div class="text-caption text-primary-container font-bold">MAST 20m (타워)</div>
+<div class="text-headline-md text-primary-container my-1 font-bold">28.9 km</div>
+<div class="text-caption text-primary-container">+38.3s 조기확보</div>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-border-dark flex items-center justify-between text-caption font-telemetry-data text-text-secondary-dark">
+<span>TARGET ALTITUDE h_target: 5.0m FIXED</span>
+<span class="text-primary-container">LOS EXTENSION: +66.1% AT 20M</span>
+</div>
+</section>
+<!-- Pillar 04: Detection Probability Curve -->
+<section class="bg-surface-container border border-border-dark rounded-lg p-6 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between border-b border-border-dark pb-3 mb-4">
+<div class="flex items-center gap-2">
+<span class="font-telemetry-reticle text-telemetry-reticle text-primary-container px-2 py-0.5 rounded bg-[rgba(95,128,109,0.2)] border border-[#5F806D]">PILLAR 04</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Detection Probability Curve (탐지확률 Pd)</h2>
+</div>
+<span class="material-symbols-outlined text-text-secondary-dark" data-icon="show_chart">show_chart</span>
+</div>
+<!-- Formula Box -->
+<div class="bg-radar-canvas border border-border-dark p-4 rounded mb-5">
+<div class="font-caption text-caption text-text-secondary-dark uppercase tracking-wider mb-1">Sigmoid Logistic Probability Threshold</div>
+<div class="font-telemetry-data text-headline-sm text-primary-container tracking-wide font-medium">
+              If Dreq &gt; Dh: Pd = 0% (Geometrical Blockage)<br/>
+              Else: Pd = 1 / (1 + exp(10.986 × (Dreq / R50 - 1)))
+            </div>
+</div>
+<p class="font-body-md text-body-md text-text-secondary-dark mb-4">
+            Dreq가 수평선(Dh)을 초과하면 전파 차폐로 확률은 즉시 0%로 강등됩니다. 수평선 내부에서는 1회 스캔 탐지확률이 R50을 기점으로 급격히 감쇠하는 시그모이드 곡선을 따르며, 전술 합격 기준은 <strong class="text-primary-container">Pd ≥ 89.95%</strong>입니다.
+          </p>
+<!-- Visual Representation of Sigmoid -->
+<div class="bg-radar-canvas border border-border-dark p-4 rounded space-y-2">
+<div class="flex justify-between items-center text-caption font-telemetry-reticle text-text-secondary-dark">
+<span>Pd THRESHOLD EVALUATION</span>
+<span class="text-primary-container font-mono">CRITICAL: 89.95%</span>
+</div>
+<div class="w-full bg-surface-container-high h-4 rounded overflow-hidden relative">
+<div class="bg-primary-container h-full" style="width: 89.95%;"></div>
+<div class="absolute top-0 bottom-0 left-[89.95%] w-0.5 bg-on-surface shadow-sm"></div>
+</div>
+<div class="flex justify-between text-caption font-telemetry-reticle text-text-secondary-dark pt-1">
+<span>0% (FAIL)</span>
+<span>50% (R50 PIVOT)</span>
+<span class="text-primary-container font-bold">89.95% (PASS)</span>
+<span>100% (CERTAIN)</span>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-border-dark flex items-center justify-between text-caption font-telemetry-data text-text-secondary-dark">
+<span>SLOPE COEFFICIENT: k = 10.986</span>
+<span class="text-primary-container">BINARY STATUS DISCRIMINATION</span>
+</div>
+</section>
+</div>
+<!-- Interactive Technology Sandbox Widget & Diagnostic Log (Split-Screen Viewport Pattern) -->
+<section class="border border-border-dark rounded-lg overflow-hidden bg-surface-container">
+<div class="bg-surface-container-high px-6 py-4 border-b border-border-dark flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container" data-icon="tune">tune</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Interactive Technology Sandbox (공학 파라미터 시뮬레이션 콘솔)</h2>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-caption font-telemetry-reticle uppercase text-text-secondary-dark">SIMULATION KERNEL:</span>
+<span class="px-2 py-0.5 rounded bg-[rgba(95,128,109,0.2)] text-primary-container border border-[#5F806D] font-telemetry-data text-caption font-bold">ONLINE</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-border-dark">
+<!-- Left Controller Pane (60%) -->
+<div class="lg:col-span-7 p-6 space-y-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Target Selection -->
+<div class="space-y-2">
+<label class="font-label-field text-label-field text-text-secondary-dark uppercase flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="rocket_launch">rocket_launch</span>
+                표적 프로파일 (Target Profile)
+              </label>
+<div class="grid grid-cols-2 gap-2">
+<button class="p-3 text-left rounded border transition-colors bg-radar-canvas border-primary-container text-primary-container" id="btn-target-cruise" onclick="setTarget('cruise')">
+<div class="font-headline-sm text-headline-sm font-bold">순항미사일</div>
+<div class="font-telemetry-reticle text-telemetry-reticle opacity-80 mt-1">V: 300m/s | RCS: 0.1m²</div>
+</button>
+<button class="p-3 text-left rounded border transition-colors bg-surface-container-low border-border-dark text-text-secondary-dark hover:border-[#5F806D]" id="btn-target-fighter" onclick="setTarget('fighter')">
+<div class="font-headline-sm text-headline-sm font-bold">전투기</div>
+<div class="font-telemetry-reticle text-telemetry-reticle opacity-80 mt-1">V: 250m/s | RCS: 3.0m²</div>
+</button>
+</div>
+</div>
+<!-- Weather Selection -->
+<div class="space-y-2">
+<label class="font-label-field text-label-field text-text-secondary-dark uppercase flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="cloud">cloud</span>
+                기상 환경 감쇄 (Weather Factor)
+              </label>
+<div class="grid grid-cols-2 gap-2">
+<button class="p-3 text-left rounded border transition-colors bg-radar-canvas border-primary-container text-primary-container" id="btn-weather-clear" onclick="setWeather('clear')">
+<div class="font-headline-sm text-headline-sm font-bold">맑음 (Clear)</div>
+<div class="font-telemetry-reticle text-telemetry-reticle opacity-80 mt-1">Factor: 1.0 (감쇄 없음)</div>
+</button>
+<button class="p-3 text-left rounded border transition-colors bg-surface-container-low border-border-dark text-text-secondary-dark hover:border-[#5F806D]" id="btn-weather-rain" onclick="setWeather('rain')">
+<div class="font-headline-sm text-headline-sm font-bold">비 (Rain)</div>
+<div class="font-telemetry-reticle text-telemetry-reticle opacity-80 mt-1">Factor: 0.9 (-10% 손실)</div>
+</button>
+</div>
+</div>
+</div>
+<!-- Mast Elevation Selector -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="font-label-field text-label-field text-text-secondary-dark uppercase flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="cell_tower">cell_tower</span>
+                해안 기지 마스트 안테나 고도 (h_antenna)
+              </label>
+<span class="font-telemetry-data text-primary-container font-bold" id="mast-display">20m (Tower Elevation)</span>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<button class="py-2.5 px-3 rounded text-center border font-telemetry-data text-caption bg-surface-container-low border-border-dark text-text-secondary-dark hover:border-[#5F806D]" id="mast-btn-4" onclick="setMast(4)">4m (기본 초소)</button>
+<button class="py-2.5 px-3 rounded text-center border font-telemetry-data text-caption bg-surface-container-low border-border-dark text-text-secondary-dark hover:border-[#5F806D]" id="mast-btn-10" onclick="setMast(10)">10m (표준 관제소)</button>
+<button class="py-2.5 px-3 rounded text-center border font-telemetry-data text-caption bg-radar-canvas border-primary-container text-primary-container font-bold" id="mast-btn-20" onclick="setMast(20)">20m (연안 감시탑)</button>
+</div>
+</div>
+<!-- Real-Time Computed Telemetry Cards -->
+<div class="grid grid-cols-3 gap-3 pt-2">
+<div class="bg-radar-canvas border border-border-dark p-3 rounded">
+<div class="font-caption text-caption text-text-secondary-dark">요구 탐지거리 Dreq</div>
+<div class="font-telemetry-metric text-headline-lg text-on-surface my-1" id="stat-dreq">7.40 km</div>
+<div class="font-telemetry-reticle text-telemetry-reticle text-[#5F806D]">Req Perimeter</div>
+</div>
+<div class="bg-radar-canvas border border-border-dark p-3 rounded">
+<div class="font-caption text-caption text-text-secondary-dark">50% 탐지거리 R50</div>
+<div class="font-telemetry-metric text-headline-lg text-primary-container my-1" id="stat-r50">16.87 km</div>
+<div class="font-telemetry-reticle text-telemetry-reticle text-[#5F806D]">RCS Compensated</div>
+</div>
+<div class="bg-radar-canvas border border-border-dark p-3 rounded">
+<div class="font-caption text-caption text-text-secondary-dark">레이더 수평선 Dh</div>
+<div class="font-telemetry-metric text-headline-lg text-on-surface my-1" id="stat-dh">27.64 km</div>
+<div class="font-telemetry-reticle text-telemetry-reticle text-[#5F806D]">Earth Horizon</div>
+</div>
+</div>
+</div>
+<!-- Right Diagnostic & Analysis Output Pane (40%) -->
+<div class="lg:col-span-5 p-6 flex flex-col justify-between bg-surface-container-low">
+<div class="space-y-5">
+<!-- Result Probability Verdict -->
+<div class="p-4 rounded border bg-radar-canvas border-border-dark space-y-3">
+<div class="flex justify-between items-center">
+<span class="font-caption text-caption text-text-secondary-dark uppercase tracking-wider">탐지 확률 산출 결과 (Computed Pd)</span>
+<span class="px-2.5 py-0.5 rounded text-caption font-telemetry-reticle font-bold uppercase bg-badge-green-soft text-badge-text-green" id="status-badge">
+                  PASSED (요격 승인)
+                </span>
+</div>
+<div class="flex items-baseline gap-3">
+<div class="font-telemetry-metric text-display-hero text-primary-container" id="stat-pd">99.8%</div>
+<div class="font-caption text-caption text-text-secondary-dark">기준치 Pd ≥ 89.95%</div>
+</div>
+<p class="font-body-md text-body-md text-text-secondary-dark leading-relaxed" id="pd-commentary">
+                현재 요구 탐지거리(7.40km)가 지구 곡률 수평선(27.64km) 내부 및 50% 탐지거리(16.87km) 여유 영역에 위치하여 확실한 1회 스캔 탐지 및 표적 식별이 가능합니다.
+              </p>
+</div>
+<!-- RADARO AI Assistant Explanation Quote Box -->
+<div class="p-4 rounded border border-[#CFDADF] bg-surface-light text-text-on-light relative space-y-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[20px] bg-radar-canvas p-1 rounded-sm" data-icon="smart_toy">smart_toy</span>
+<span class="font-headline-sm text-headline-sm font-bold text-text-on-light">RADARO AI System Analyst Brief</span>
+</div>
+<p class="font-body-md text-body-md text-text-secondary-light leading-relaxed" id="ai-quote">
+                "마스트 20m 탑재 시 초저고도 순항유도탄에 대하여 약 38초 이상의 대응 여유 시간을 확보합니다. 기상 악화(강우) 환경에서도 R50 방정식의 4제곱근 감쇄율(-10%)이 기준 요격거리 Dreq를 안정적으로 상회합니다."
+              </p>
+</div>
+</div>
+<div class="pt-4 flex items-center justify-between text-caption font-telemetry-reticle text-text-secondary-dark border-t border-border-dark mt-4">
+<span>ENGAGEMENT SAFETY MARGIN: OPTIMAL</span>
+<span class="text-primary-container font-mono">HASH: 0x82F-C20N</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component JSON Blueprint) -->
+<footer class="w-full bg-surface-container-lowest border-t border-border-dark py-8 px-gutter-desktop mt-12">
+<div class="w-full max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<!-- Defense System Brand & Disclaimer -->
+<div class="flex flex-col gap-1 text-center md:text-left">
+<span class="font-headline-sm text-headline-sm tracking-tight text-on-surface font-bold uppercase">RADAR INSIGHT DEFENSE SYSTEMS</span>
+<p class="font-caption text-caption uppercase tracking-widest text-text-secondary-dark">
+          © 2025 RADAR INSIGHT DEFENSE SYSTEMS. ALL RIGHTS RESERVED. ITAR CONTROLLED TECHNICAL SPECIFICATIONS.
+        </p>
+</div>
+<!-- Footer Policy Links -->
+<div class="flex flex-wrap justify-center gap-4 font-caption text-caption uppercase tracking-widest text-text-secondary-dark">
+<span title="안내 문서 준비 중" class="hover:text-primary transition-colors">Security Classification</span>
+<span title="안내 문서 준비 중" class="hover:text-primary transition-colors">Terms of Deployment</span>
+<span title="안내 문서 준비 중" class="hover:text-primary transition-colors">Compliance Protocol</span>
+<span title="안내 문서 준비 중" class="hover:text-primary transition-colors">Telemetry Logs</span>
+<span title="안내 문서 준비 중" class="hover:text-primary transition-colors">Privacy Directive</span>
+</div>
+</div>
+</footer>
+<!-- Interactive Sandbox Vanilla JavaScript Engine -->
+<script>
+    let state = {
+      target: 'cruise', // 'cruise' | 'fighter'
+      weather: 'clear', // 'clear' | 'rain'
+      mast: 20          // 4 | 10 | 20
+    };
+
+    const targetData = {
+      cruise: { v: 300, rcs: 0.1, h_target: 5.0, name: '순항미사일' },
+      fighter: { v: 250, rcs: 3.0, h_target: 100.0, name: '전투기' }
+    };
+
+    const weatherData = {
+      clear: 1.0,
+      rain: 0.9
+    };
+
+    const R0 = 30.0; // km for 1m²
+    const Treaction = 12.0; // s
+    const Treduction = 4.0; // s
+
+    function setTarget(type) {
+      state.target = type;
+      document.getElementById('btn-target-cruise').className = type === 'cruise' 
+        ? "p-3 text-left rounded border transition-colors bg-radar-canvas border-primary-container text-primary-container"
+        : "p-3 text-left rounded border transition-colors bg-surface-container-low border-border-dark text-text-secondary-dark hover:border-[#5F806D]";
+      
+      document.getElementById('btn-target-fighter').className = type === 'fighter'
+        ? "p-3 text-left rounded border transition-colors bg-radar-canvas border-primary-container text-primary-container"
+        : "p-3 text-left rounded border transition-colors bg-surface-container-low border-border-dark text-text-secondary-dark hover:border-[#5F806D]";
+      
+      calculate();
+    }
+
+    function setWeather(w) {
+      state.weather = w;
+      document.getElementById('btn-weather-clear').className = w === 'clear'
+        ? "p-3 text-left rounded border transition-colors bg-radar-canvas border-primary-container text-primary-container"
+        : "p-3 text-left rounded border transition-colors bg-surface-container-low border-border-dark text-text-secondary-dark hover:border-[#5F806D]";
+
+      document.getElementById('btn-weather-rain').className = w === 'rain'
+        ? "p-3 text-left rounded border transition-colors bg-radar-canvas border-primary-container text-primary-container"
+        : "p-3 text-left rounded border transition-colors bg-surface-container-low border-border-dark text-text-secondary-dark hover:border-[#5F806D]";
+
+      calculate();
+    }
+
+    function setMast(height) {
+      state.mast = height;
+      [4, 10, 20].forEach(h => {
+        const btn = document.getElementById(`mast-btn-${h}`);
+        if (h === height) {
+          btn.className = "py-2.5 px-3 rounded text-center border font-telemetry-data text-caption bg-radar-canvas border-primary-container text-primary-container font-bold";
+        } else {
+          btn.className = "py-2.5 px-3 rounded text-center border font-telemetry-data text-caption bg-surface-container-low border-border-dark text-text-secondary-dark hover:border-[#5F806D]";
+        }
+      });
+      document.getElementById('mast-display').innerText = `${height}m (${height === 20 ? 'Tower Elevation' : height === 10 ? 'Standard Mast' : 'Low Post'})`;
+      calculate();
+    }
+
+    function calculate() {
+      const tgt = targetData[state.target];
+      const wf = weatherData[state.weather];
+
+      // 1. Dreq
+      const dreq = 5.0 + (tgt.v * Math.max(Treaction - Treduction, 0)) / 1000.0;
+
+      // 2. R50
+      const r50 = R0 * Math.pow(tgt.rcs, 0.25) * wf;
+
+      // 3. Dh
+      const dh = 4.12 * (Math.sqrt(state.mast) + Math.sqrt(tgt.h_target));
+
+      // 4. Pd
+      let pdPercent = 0;
+      let isBlocked = false;
+
+      if (dreq > dh) {
+        pdPercent = 0;
+        isBlocked = true;
+      } else {
+        const exponent = 10.986 * ((dreq / r50) - 1.0);
+        const pd = 1.0 / (1.0 + Math.exp(exponent));
+        pdPercent = pd * 100.0;
+      }
+
+      // Update UI elements
+      document.getElementById('stat-dreq').innerText = `${dreq.toFixed(2)} km`;
+      document.getElementById('stat-r50').innerText = `${r50.toFixed(2)} km`;
+      document.getElementById('stat-dh').innerText = `${dh.toFixed(2)} km`;
+      document.getElementById('stat-pd').innerText = `${pdPercent.toFixed(1)}%`;
+
+      const badge = document.getElementById('status-badge');
+      const commentary = document.getElementById('pd-commentary');
+      const aiQuote = document.getElementById('ai-quote');
+
+      if (isBlocked) {
+        badge.className = "px-2.5 py-0.5 rounded text-caption font-telemetry-reticle font-bold uppercase bg-error-container text-error";
+        badge.innerText = "GEOMETRICAL BLOCKAGE (LOS 차폐)";
+        commentary.innerText = `요구 탐지거리(${dreq.toFixed(2)}km)가 지구 곡률 수평선(${dh.toFixed(2)}km) 바깥에 있어 전파가 물리적으로 도달하지 못합니다. 마스트 고도를 높이거나 전진 기지를 전개하십시오.`;
+        aiQuote.innerText = `"경고: 표적이 레이더 수평선 너머 사각지대에 차폐되어 방어 요격 루프 형성이 불가능합니다. 안테나 마스트를 20m 이상으로 전개하여 가시거리를 확보해야 합니다."`;
+      } else if (pdPercent >= 89.95) {
+        badge.className = "px-2.5 py-0.5 rounded text-caption font-telemetry-reticle font-bold uppercase bg-badge-green-soft text-badge-text-green";
+        badge.innerText = "PASSED (요격 승인)";
+        commentary.innerText = `현재 요구 탐지거리(${dreq.toFixed(2)}km)가 지구 곡률 수평선(${dh.toFixed(2)}km) 내부 및 50% 탐지거리(${r50.toFixed(2)}km) 여유 영역에 위치하여 확실한 1회 스캔 탐지 및 표적 식별이 가능합니다.`;
+        aiQuote.innerText = `"현재 수평선 확보율과 수신 신호 대 잡음비(SNR)가 완벽한 전술 임계값을 충족합니다. 4초 단축 패키지가 적용되어 안전 반경 외곽에서 조기 요격 솔루션을 연산할 수 있습니다."`;
+      } else {
+        badge.className = "px-2.5 py-0.5 rounded text-caption font-telemetry-reticle font-bold uppercase bg-[#3a2010] text-[#ffab66]";
+        badge.innerText = "DEGRADED (주의 요망)";
+        commentary.innerText = `탐지확률(${pdPercent.toFixed(1)}%)이 규정 기준치(89.95%) 미만입니다. 표적 RCS 감쇄 또는 기상 감쇄 요인에 의해 다중 스캔 적분(M-of-N) 처리가 필요합니다.`;
+        aiQuote.innerText = `"R50 경계 인근에서 급격한 시그모이드 감쇄 현상이 관측됩니다. 비인가 스텔스 표적의 낮은 반사 면적으로 인해 펄스 압축 및 다중 빔 적분 루프를 가동해야 합니다."`;
+      }
+    }
+
+    // Initialize computation
+    calculate();
+  </script>
+</body></html>
